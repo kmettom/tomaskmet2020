@@ -1,16 +1,22 @@
 1.
-RWD
+
+cursor - adjust to fit better, add hover functionality in better way, adjust code to be inspired, not copied - create class , change structure
 
 2.
-image change - activate when images are loaded
+
+image change - image gif - make as background change. or img bacground and translate
 
 3.
+
 update content
+- about text
+- tech stack
+- projects
 
 4.
-cursor
+
+RWD
 
 5.
-smooth scroll
 
 6.
