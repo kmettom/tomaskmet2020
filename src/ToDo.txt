@@ -1,0 +1,16 @@
+1.
+RWD
+
+2.
+image change - activate when images are loaded
+
+3.
+update content
+
+4.
+cursor
+
+5.
+smooth scroll
+
+6.

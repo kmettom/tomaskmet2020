@@ -14,7 +14,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 
 module.exports = {
-  entry: './src/jk_portfolio.js',
+  entry: './src/tk_portfolio.js',
   output: {
     // filename: 'jk_portfolio.js',
     filename: process.env.NODE_ENV === 'production' ?  "jk_portfolio.[hash].js" : "jk_portfolio.js",
