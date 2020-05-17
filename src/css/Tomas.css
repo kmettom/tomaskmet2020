@@ -1,0 +1,162 @@
+/* <!-- -------------------------------GENERAL------------------------------------- --> */
+
+@font-face {
+  font-family: "OldStandardTT";
+  src: url(../font/oldstandard.ttf);
+}
+
+@font-face {
+  font-family: "WorkSans";
+  src: url(../font/WorkSans-Light.ttf);
+}
+
+body {
+  /* cursor: none; */
+  background-color: #eeeeee;
+  margin: 5% 13%;
+  color: #333333;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+a:link {
+  text-decoration: none;
+  color: #333333;
+}
+
+a:visited {
+  color: #333333;
+}
+
+/* <!-- -------------------------------TOP MENU------------------------------------- --> */
+.top-menu {
+  font-family: "WorkSans";
+  font-size: 15px;
+  /* position: fixed;
+  width: 100%; */
+}
+
+.menu-elements {
+  display: flex;
+  justify-content: space-between;
+  /* position: fixed; */
+}
+/* <!-- -------------------------------HEADER------------------------------------- --> */
+.header {
+  height: calc(100vh - 70px);
+}
+
+.header-text {
+  font-family: "OldStandardTT";
+  font-size: 144px;
+  letter-spacing: -5px;
+  position: relative;
+  margin: 0 auto;
+  top: 50%;
+  transform: translate(0, -50%);
+  right: 0px;
+  left: 0px;
+}
+
+/* <!-- -------------------------------ABOUT------------------------------------- --> */
+.about {
+  font-family: "WorkSans";
+  font-size: 15px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 120px;
+}
+.about-header {
+  width: 15%;
+}
+
+.about-text {
+  width: 50%;
+  text-transform: uppercase;
+}
+
+/* <!-- -------------------------------SKILLS------------------------------------- --> */
+.skills {
+  font-family: "WorkSans";
+  font-size: 15px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 120px;
+  margin-bottom: 120px;
+}
+
+.skills-header {
+  width: 15%;
+}
+
+.skills-text {
+  width: 50%;
+  text-transform: uppercase;
+}
+/* <!-- -------------------------------IMG------------------------------------- --> */
+.img {
+  margin-bottom: 120px;
+}
+/* <!-- -------------------------------PROJECTS------------------------------------- --> */
+.project-position {
+  font-family: "WorkSans";
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.project-title {
+  font-family: "OldStandardTT";
+  font-size: 80px;
+  margin-top: 10px;
+  margin-bottom: 100px;
+}
+/* <!-- -------------------------------CONTACT------------------------------------- --> */
+.contact {
+  font-family: "WorkSans";
+  font-size: 15px;
+  margin-left: 50%;
+}
+
+.contact-number {
+  margin: 0px;
+}
+
+.contact-mail {
+  margin: 0px;
+}
+
+.social-media {
+  margin-top: 20px;
+}
+
+.linkedin {
+  margin-right: 20px;
+}
+
+.github {
+  margin-right: 20px;
+}
+
+/* <!-- -------------------------------RIGHTS------------------------------------- --> */
+.rights {
+  font-family: "WorkSans";
+  font-size: 15px;
+  margin-left: 50%;
+  margin-top: 120px;
+  margin-bottom: 120px;
+  text-transform: uppercase;
+}
+
+.right-mockups {
+  margin: 0px;
+}
+
+.right-fonts {
+  margin: 0px;
+}
+
+.right-design {
+  margin: 0px;
+}
+
+/* <!-- -------------------------------YEAR FOOTER------------------------------------- --> */
