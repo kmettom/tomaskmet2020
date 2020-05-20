@@ -9,57 +9,52 @@
   }, false);
   </script>
 
-
   <meta charset="utf-8" />
   <meta name="Portfolio" />
   <!-- <link rel="stylesheet" href="./css/Tomas.css" type="text/css" /> -->
   <title>Tomas Kmet</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <link rel="shortcut icon" href="./img/favicon.jpg" />
-
   <style media="screen">
-
   @font-face {
     font-family: "OldStandardTT";
     src: url(./font/oldstandard.ttf);
   }
-
   @font-face {
     font-family: "WorkSans";
     src: url(./font/WorkSans-Light.ttf);
   }
-
   body{
     background-color: #eeeeee;
     color: #eeeeee;
-
-    /* background: #e2e2e2; */
-    /* color: #e2e2e2; */
   }
-
-
+  a{
+    color: #eeeeee;
+  }
+  svg{
+    opacity: 0;
+  }
   </style>
 
-
-
 </head>
+
 <body>
+
+  <div id="firstAnimationOverlay"></div>
+
+  <!-- -------------------------------TOP MENU------------------------------------- -->
+  <section class="top-menu">
+    <p class="menu-elements">
+      <span class="folio"> FOLIO 2020</span>
+      <span class="avaible">AVAIABLE FROM: July</span>
+      <a href="mailto:hello@kmettom.comm" class="contact-element" target="_blank">CONTACT ME</a>
+    </p>
+  </section>
 
   <div class="" id="scrollContainer" >
 
     <div class="sections-wrapper">
 
-      <!-- -------------------------------TOP MENU------------------------------------- -->
-      <section class="top-menu">
-        <p class="menu-elements">
-          <span class="folio"> FOLIO 2020</span>
-          <span class="avaible">AVAIABLE FROM: July</span>
-          <a href="mailto:hello@kmettom.comm" class="contact-element" target="_blank"
-          >CONTACT ME</a
-          >
-        </p>
-      </section>
       <!-- -------------------------------HEADER------------------------------------- -->
       <section class="header">
         <p class="header-text">I’m Tomáš</br>front & interactive</br> developer</p>
@@ -83,17 +78,15 @@
       </section>
       <!-- -------------------------------IMG------------------------------------- -->
       <section class="img">
-        <div class="img-wrapper screen1">
-          <!-- <img class="portfolio-img" src="img/screen_1.jpg"  alt="project images"  height="auto"  /> -->
-        </div>
-        <div class="img-wrapper screen2">
-          <!-- <img class="portfolio-img" src="img/screen_2.jpg"  alt="project images"  height="auto"  /> -->
-        </div>
-        <!-- <img class="portfolio-img" src="img/screen_3.jpg"  alt="project images"  height="auto"  />
-        <img class="portfolio-img" src="img/screen_4.jpg"  alt="project images"  height="auto"  />
-        <img class="portfolio-img" src="img/screen_5.jpg"  alt="project images"  height="auto"  />
-        <img class="portfolio-img" src="img/screen_6.jpg"  alt="project images"  height="auto"  />
-        <img class="portfolio-img" src="img/screen_7.jpg"  alt="project images"  height="auto"  /> -->
+
+        <div class="portfolio-img img-wrapper" style="background:url('img/screen_1.jpg'); background-repeat: no-repeat; background-size: contain; "></div>
+        <div class="portfolio-img img-wrapper" style="background:url('img/screen_2.jpg'); background-repeat: no-repeat; background-size: contain; "></div>
+        <div class="portfolio-img img-wrapper" style="background:url('img/screen_3.jpg'); background-repeat: no-repeat; background-size: contain; "></div>
+        <div class="portfolio-img img-wrapper" style="background:url('img/screen_4.jpg'); background-repeat: no-repeat; background-size: contain; "></div>
+        <div class="portfolio-img img-wrapper" style="background:url('img/screen_5.jpg'); background-repeat: no-repeat; background-size: contain; "></div>
+        <div class="portfolio-img img-wrapper" style="background:url('img/screen_6.jpg'); background-repeat: no-repeat; background-size: contain; "></div>
+        <div class="portfolio-img img-wrapper" style="background:url('img/screen_7.jpg'); background-repeat: no-repeat; background-size: contain; "></div>
+
       </section>
       <!-- -------------------------------PROJECTS------------------------------------- -->
       <section class="projects">

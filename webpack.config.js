@@ -55,6 +55,7 @@ module.exports = {
       {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
+        include: path.join(__dirname, 'src/img'),
         options: {
           name: '[name].[ext]'
         }

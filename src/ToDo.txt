@@ -1,10 +1,12 @@
 1.
 
-cursor - adjust to fit better, add hover functionality in better way, adjust code to be inspired, not copied - create class , change structure
+First load - make clean
+
+cursor - adjust to fit better, add hover functionality in better way, adjust code to mine
 
 2.
 
-image change - image gif - make as background change. or img bacground and translate
+image change - make faster on beggining? - try to init when user scrolls to section?
 
 3.
 
