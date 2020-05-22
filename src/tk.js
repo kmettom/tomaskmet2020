@@ -10,7 +10,7 @@ let scrollInstance = new Scroll;
 const init = function () {
 
   setTimeout(()=>{
-    pageEnterAnimation();
+    // pageEnterAnimation();
     // updateSectionPositions();
   }, 500);
 
@@ -23,6 +23,8 @@ const init = function () {
 
 const pageEnterAnimation = () => {
   document.getElementById('firstAnimationOverlay').classList.add('hide');
+  // document.getElementById('menuElements').classList.add('animate-in');
+  // document.getElementById('headerText').classList.add('animate-in');
 };
 
 const portfolioImageRotate = () => {

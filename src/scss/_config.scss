@@ -16,3 +16,10 @@ $w-m: 1280px; // ipad big resolution
 $w-m-s: 1024px; // ipad big resolution
 $w-s: 768px; // ipad small resolution
 $w-xs: 550px; // mobile resolution
+
+
+// Normalize
+
+p {
+  padding: 0px; margin: 0px;
+}

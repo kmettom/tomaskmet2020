@@ -69,11 +69,14 @@ body {
   left: 0px;
   right: 0px;
   height: 100vh;
-  background: $white;
+  background: $black;
   z-index: 99;
-  transition: linear height 0.70s;
+  pointer-events: none;
+  transition: linear opacity 0.50s;
   &.hide{
-    height: 0px;
+    z-index: -1;
+    opacity: 0;
+    // height: 0px;
   }
 }
 
@@ -88,6 +91,10 @@ body {
   }
 }
 
+a{
+  cursor: none;
+}
+
 a:link {
   text-decoration: none;
   color: #333333;
@@ -96,6 +103,7 @@ a:link {
 a:visited {
   color: #333333;
 }
+
 
 /* <!-- -------------------------------TOP MENU------------------------------------- --> */
 .top-menu {
@@ -108,11 +116,20 @@ a:visited {
   width: 100%;
   z-index: 99;
   .menu-elements{
+    // opacity: 0;
     padding: 5% 13% ;
     @include respond-width($w-m-s){
       padding: 5% 5%;
     }
+    // &.animate-in{
+    //   transition: ease all 0.3s;
+    //   opacity: 1;
+    // }
   }
+  .contact-element{
+    padding: 5px 0px;
+  }
+
 }
 
 .menu-elements {
@@ -140,6 +157,21 @@ a:visited {
   transform: translate(0, -50%);
   right: 0px;
   left: 0px;
+  // &.animate-in{
+  //   span{
+  //     transition: linear all 0.5s;
+  //     opacity: 1;
+  //     &:nth-child(1){
+  //       transition-delay: 0.15s;
+  //     }
+  //     &:nth-child(2){
+  //       transition-delay: 0.3s;
+  //     }
+  //     &:nth-child(3){
+  //       transition-delay: 0.45s;
+  //     }
+  //   }
+  // }
   @include respond-width($w-l){
     font-size: 130px;
   }
@@ -153,6 +185,10 @@ a:visited {
     top: 0px;
     transform: translate( 0px , 0px);
     font-size: 75px;
+  }
+  span{
+    // opacity: 0;
+    // &:nth
   }
 }
 
@@ -199,8 +235,17 @@ a:visited {
   margin-bottom: 120px;
   overflow: hidden;
   max-width: 100%;
-  width: 1040px;
-  height: 780px;
+  // width: 1040px;
+  height: 1200px;
+  @include respond-width($w-xl){
+    height: 1100px;
+  }
+  @include respond-width($w-l){
+    height: 1000px;
+  }
+  @include respond-width($w-m){
+    height: 780px;
+  }
 
   .portfolio-img{
     width: 100%;
@@ -216,25 +261,68 @@ a:visited {
 
 /* <!-- -------------------------------PROJECTS------------------------------------- --> */
 
-.project-title {
-  a{
+.project{
+  margin-bottom: 100px;
+.project-title{
+  &:hover{
+    .project-stack{
+      span{
+        opacity: 1;
+      }
+    }
+  }
+}
+  .project-name{
     font-family: "OldStandardTT";
     font-size: 80px;
-    margin-top: 10px;
-    margin-bottom: 100px;
+    margin-top: 0px;
     width: 600px;
     display: inline-block;
-    // vertical-align: top;
+    line-height: 100%;
   }
   .project-position,
   .project-stack{
     font-family: "WorkSans";
     font-size: 15px;
     text-transform: uppercase;
-    top: 5px;
+    // top: 5px;
     position: relative;
     display: inline-block;
     vertical-align: top;
+  }
+  .project-position{
+    margin-bottom: 20px;
+  }
+  .project-stack{
+    span{
+      transition: ease opacity 0.2s;
+      opacity: 0;
+      &:before{
+        content: '|';
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        padding: 4px;
+      }
+      &:nth-child(1):before{
+        content: none;
+      }
+      &:nth-child(1){
+        transition-delay: 0.05s;
+      }
+      &:nth-child(2){
+        transition-delay: 0.1s;
+      }
+      &:nth-child(3){
+        transition-delay: 0.15s;
+      }
+      &:nth-child(4){
+        transition-delay: 0.20s;
+      }
+      &:nth-child(5){
+        transition-delay: 0.25s;
+      }
+    }
   }
 }
 /* <!-- -------------------------------CONTACT------------------------------------- --> */
@@ -291,5 +379,6 @@ a:visited {
 .year-footer{
   svg{
     max-width: 100%;
+    opacity: 1;
   }
 }

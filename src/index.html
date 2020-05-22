@@ -40,24 +40,36 @@
 
 <body>
 
-  <div id="firstAnimationOverlay"></div>
+  <div id="firstAnimationOverlay">
+    <div class="cursor-dot-outline"></div>
+    <div class="cursor-dot"></div>
+  </div>
 
   <!-- -------------------------------TOP MENU------------------------------------- -->
   <section class="top-menu">
-    <p class="menu-elements">
+    <p class="menu-elements" id="menuElements">
       <span class="folio"> FOLIO 2020</span>
       <span class="avaible">AVAIABLE FROM: July</span>
-      <a href="mailto:hello@kmettom.comm" class="contact-element" target="_blank">CONTACT ME</a>
+      <a href="mailto:hello@kmettom.comm" class="contact-element cursor-hover" target="_blank">CONTACT ME</a>
     </p>
   </section>
 
   <div class="" id="scrollContainer" >
 
     <div class="sections-wrapper">
-
       <!-- -------------------------------HEADER------------------------------------- -->
       <section class="header">
-        <p class="header-text">I’m Tomáš</br>front & interactive</br> developer</p>
+        <p class="header-text" id="headerText">
+          <span class="">
+            I’m Tomáš</br>
+          </span>
+          <span>
+            front & interactive </br>
+          </span>
+          <span>
+            developer
+          </span>
+        </p>
       </section>
       <!-- -------------------------------ABOUT------------------------------------- -->
       <section class="about">
@@ -91,42 +103,59 @@
       <!-- -------------------------------PROJECTS------------------------------------- -->
       <section class="projects">
         <div class="project">
-          <p class="project-position">
-            <span>
+          <a class="cursor-hover" href="https://jagodakondratiuk.com/" target="_blank">
+            <p class="project-position">
               FREELANCE DEV
-            </span>
-          </p>
-          <p class="project-title">
-            <a href="https://jagodakondratiuk.com/" target="_blank">UI&UX Folio </a>
-            <span class="project-stack">
-              NODEJS | VUEJS | NESTJS | ES6+
-            </span>
-          </p>
-
+            </p>
+            <p class="project-title">
+              <span class="project-name">
+                UI&UX Folio
+              </span>
+              <span class="project-stack">
+                <span>ES6+</span>
+                <span>RequestAnimationFrame</span>
+                <span>Webpack</span>
+              </span>
+            </p>
+          </a>
         </div>
         <div class="project">
-          <p class="project-position">
-            <span>
+            <p class="project-position">
               FREELANCE full stack
-            </span>
-          </p>
-          <p class="project-title">
-            <a href="https://jagodakondratiuk.com/" target="_blank">EOTM </a>
-            <span class="project-stack">
-              NODEJS | VUEJS | NESTJS | ES6+
-            </span>
-          </p>
+            </p>
+            <p class="project-title">
+              <!-- <a class="cursor-hover" href="https://jagodakondratiuk.com/" target="_blank"> -->
+              <span class="project-name">
+                EOTM
+              </span>
+              <span class="project-stack">
+                <span>comming</span>
+                <span>soon</span>
+                <!-- <span>VueJS</span>
+                <span>ES6+</span>
+                <span>Webpack</span>
+                <span>ExpressJS</span>
+                <span>MongoDB</span> -->
+              </span>
+            <!-- </a> -->
+            </p>
         </div>
         <div class="project">
           <p class="project-position">
-            <span>
               LEAD FRONT-END DEV
-            </span>
           </p>
           <p class="project-title">
-            <a href="https://jagodakondratiuk.com/" target="_blank">Yabbu </a>
+            <a class="cursor-hover" href="https://jagodakondratiuk.com/" target="_blank">
+              <span class="project-name">
+                Yabbu
+              </span>
+            </a>
             <span class="project-stack">
-              NODEJS | VUEJS | NESTJS | ES6+
+              <span>VueJS</span>
+              <span>AngularJS</span>
+              <span>ES6+</span>
+              <span>Webpack</span>
+              <span>Grunt</span>
             </span>
           </p>
         </div>
@@ -135,35 +164,15 @@
       <!-- -------------------------------CONTACT------------------------------------- -->
       <section class="contact">
         <p class="contact-number">
-          <a href="tel:+31 6 23 60 62 84" class="number" target="_blank"
-          >+31 6 23 60 62 84</a
-          >
+          <a href="tel:+31 6 23 60 62 84" class="number" target="_blank"  >+31 6 23 60 62 84</a >
         </p>
         <p class="contact-mail">
-          <a href="mailto:hello@kmettom.com" class="mail" target="_blank"
-          >hello@kmettom.com</a
-          >
+          <a href="mailto:hello@kmettom.com" class="mail" target="_blank" >hello@kmettom.com</a >
         </p>
         <p class="social-media">
-          <a
-          href="https://www.linkedin.com/in/tomas-kmet/"
-          class="linkedin"
-          target="_blank"
-          >LINKEDIN</a
-          >
-          <a
-          href="https://www.linkedin.com/in/tomas-kmet/"
-          class="github"
-          target="_blank"
-          >GITHUB</a
-          >
-
-          <a
-          href="hhttps://www.instagram.com/kmettom/?hl=en"
-          class="instagram"
-          target="_blank"
-          >INSTAGRAM</a
-          >
+          <a class="cursor-hover" href="https://www.linkedin.com/in/tomas-kmet/" class="linkedin" target="_blank" >LINKEDIN</a >
+          <a class="cursor-hover" href="https://www.linkedin.com/in/tomas-kmet/" class="github" target="_blank"   >GITHUB</a >
+          <a class="cursor-hover" href="hhttps://www.instagram.com/kmettom/?hl=en" class="instagram" target="_blank" >INSTAGRAM</a >
         </p>
       </section>
       <!-- -------------------------------RIGHTS------------------------------------- -->
@@ -172,20 +181,10 @@
           FONTS: WORK SANS, Old Standard TT
         </p>
         <p class="right-mockups">
-          <a
-          href="https://www.anthonyboyd.graphics/"
-          class="right-mockups-link"
-          target="_blank"
-          >MOCKUPS: Anthony Boyd Graphics</a
-          >
+          <a class="cursor-hover" href="https://www.anthonyboyd.graphics/" class="right-mockups-link" target="_blank" >MOCKUPS: Anthony Boyd Graphics</a  >
         </p>
         <p class="right-design">
-          <a
-          href="https://jagodakondratiuk.com/"
-          class="right-design-link"
-          target="_blank"
-          >DESIGNED BY: JAGODA KONDRATIUK</a
-          >
+          <a class="cursor-hover" href="https://jagodakondratiuk.com/" class="right-design-link" target="_blank" >DESIGNED BY: JAGODA KONDRATIUK</a  >
         </p>
       </section>
       <!-- -------------------------------YEAR FOOTER------------------------------------- -->
@@ -200,7 +199,7 @@
   </div>
 
   <div class="cursor-dot-outline"></div>
-<div class="cursor-dot"></div>
+  <div class="cursor-dot"></div>
 
 </body>
 </html>

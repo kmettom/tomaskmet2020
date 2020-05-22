@@ -1,23 +1,28 @@
 1.
 
-First load - make clean
+Enter animatio -> load cursor rounnd with black background, then fade out
+https://www.aristidebenoist.com/
+
+
+
+overall style layout alignment - image width of container
 
 cursor - adjust to fit better, add hover functionality in better way, adjust code to mine
 
+RWD
+
 2.
-
-image change - make faster on beggining? - try to init when user scrolls to section?
-
-3.
 
 update content
 - about text
 - tech stack
 - projects
 
+3.
+
+
 4.
 
-RWD
 
 5.
 
