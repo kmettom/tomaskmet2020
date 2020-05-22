@@ -3,8 +3,6 @@
 Enter animatio -> load cursor rounnd with black background, then fade out
 https://www.aristidebenoist.com/
 
-
-
 overall style layout alignment - image width of container
 
 cursor - adjust to fit better, add hover functionality in better way, adjust code to mine

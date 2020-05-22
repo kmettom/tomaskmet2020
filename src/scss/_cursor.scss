@@ -1,14 +1,4 @@
 
-#firstAnimationOverlay{
-
-  .cursor-dot {
-    background-color: $white;
-  }
-  .cursor-dot-outline {
-    border: 1px solid $white;
-  }
-}
-
 .cursor-dot,
 .cursor-dot-outline {
     pointer-events: none;
@@ -33,6 +23,6 @@
     $size: 40px;
     width: $size;
     height: $size;
-    border: 1px solid rgba($black, 0.5);
+    border: 2px solid rgba($black, 0.5);
     // background-color: rgba($black, 0.3);
 }

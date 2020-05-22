@@ -6,8 +6,8 @@ var cursor = {
     endY: (window.innerHeight / 2),
     cursorVisible: true,
     cursorEnlarged: false,
-    $dot: document.querySelector('.cursor-dot'),
-    $outline: document.querySelector('.cursor-dot-outline'),
+    $dot: document.querySelector('#cursorDot'),
+    $outline: document.querySelector('#cursorDotOutline'),
 
     init: function() {
         this.dotSize = this.$dot.offsetWidth;
@@ -79,10 +79,12 @@ var cursor = {
     toggleCursorSize: function() {
         var self = this;
         if (self.cursorEnlarged) {
-            self.$dot.style.transform = 'translate(-50%, -50%) scale(1.75)';
-            self.$outline.style.transform = 'translate(-50%, -50%) scale(1.5)';
+            self.$dot.style.transform = 'translate(-50%, -50%) scale(1.5)';
+            // self.$dot.style.opacity = '0.35';
+            self.$outline.style.transform = 'translate(-50%, -50%) scale(1.20)';
         } else {
             self.$dot.style.transform = 'translate(-50%, -50%) scale(1)';
+            // self.$dot.style.opacity = '1';
             self.$outline.style.transform = 'translate(-50%, -50%) scale(1)';
         }
     },

@@ -41,8 +41,16 @@
 <body>
 
   <div id="firstAnimationOverlay">
-    <div class="cursor-dot-outline"></div>
+    <div id="container">
+      <div id="halfclip">
+        <div class="halfcircle" id="clipped">
+        </div>
+      </div>
+      <div class="halfcircle" id="fixed">
+      </div>
+    </div>
     <div class="cursor-dot"></div>
+    <!-- <div class="cursor-dot-outline"></div> -->
   </div>
 
   <!-- -------------------------------TOP MENU------------------------------------- -->
@@ -198,8 +206,8 @@
 
   </div>
 
-  <div class="cursor-dot-outline"></div>
-  <div class="cursor-dot"></div>
+  <div id="cursorDot" class="cursor-dot"></div>
+  <div id="cursorDotOutline" class="cursor-dot-outline"></div>
 
 </body>
 </html>

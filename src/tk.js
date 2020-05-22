@@ -3,16 +3,14 @@ import {getUserAgent} from './js/useragent.js';
 import {Scroll} from './js/scroll.js';
 import cursorDot from './js/cursor.js';
 
-
 let scrollInstance = new Scroll;
-
 
 const init = function () {
 
   setTimeout(()=>{
-    // pageEnterAnimation();
+    pageEnterAnimation();
     // updateSectionPositions();
-  }, 500);
+  }, 1000);
 
   setTimeout(()=>{ // after first animation over
     scrollInstance.init();
@@ -54,24 +52,24 @@ const portfolioImageRotate = () => {
 /*************************** */
 // Cursor
 /*************************** */
-class Cursor {
-  constructor() {
-    this.cursor = cursorDot({
-      easing: 4,
-      diameter: 50,
-      borderWidth: 1,
-      borderColor: "#e2e2e2",
-      background: "transparent",
-    });
-  }
+// class Cursor {
+//   constructor() {
+//     this.cursor = cursorDot({
+//       easing: 4,
+//       diameter: 50,
+//       borderWidth: 1,
+//       borderColor: "#e2e2e2",
+//       background: "transparent",
+//     });
+//   }
+//
+// };
 
-};
-
-var cursorInstance;
-var cursorInit = function () {
-  cursorInstance = new Cursor();
-
-};
+// var cursorInstance;
+// var cursorInit = function () {
+//   cursorInstance = new Cursor();
+//
+// };
 
 /*************************** */
 // DOCUMENT LOADED -> INIT
