@@ -17,7 +17,7 @@ module.exports = {
   entry: './src/tk.js',
   output: {
     // filename: 'jk_portfolio.js',
-    filename: process.env.NODE_ENV === 'production' ?  "jk_portfolio.[hash].js" : "jk_portfolio.js",
+    filename: process.env.NODE_ENV === 'production' ?  "tk_2020.[hash].js" : "tk_2020.js",
     path: path.resolve(__dirname, 'dist'),
 
   },
