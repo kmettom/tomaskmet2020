@@ -79,9 +79,9 @@ var cursor = {
     toggleCursorSize: function() {
         var self = this;
         if (self.cursorEnlarged) {
-            self.$dot.style.transform = 'translate(-50%, -50%) scale(1.5)';
+            self.$dot.style.transform = 'translate(-50%, -50%) scale(0.8)';
             // self.$dot.style.opacity = '0.35';
-            self.$outline.style.transform = 'translate(-50%, -50%) scale(1.20)';
+            self.$outline.style.transform = 'translate(-50%, -50%) scale(1.25)';
         } else {
             self.$dot.style.transform = 'translate(-50%, -50%) scale(1)';
             // self.$dot.style.opacity = '1';
