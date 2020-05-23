@@ -45,6 +45,10 @@ body {
   padding: 0px;
   margin: 0px;
   color: $black;
+  @include respond-width($w-s){
+    cursor: auto;
+    // display: none;
+  }
 }
 
 #scrollContainer{
@@ -82,333 +86,386 @@ body {
 }
 
 // section{
-//   // margin: 0px 13% ;
-// }
-
-.sections-wrapper{
-  padding: 5% 13% ;
-  @include respond-width($w-m-s){
-    padding: 5% 5%;
-  }
-}
-
-a{
-  cursor: none;
-}
-
-a:link {
-  text-decoration: none;
-  color: #333333;
-}
-
-a:visited {
-  color: #333333;
-}
-
-
-/* <!-- -------------------------------TOP MENU------------------------------------- --> */
-.top-menu {
-  font-family: "WorkSans";
-  font-size: 15px;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  width: 100%;
-  z-index: 99;
-  pointer-events: none;
-  .menu-elements{
-    // opacity: 0;
+  //   // margin: 0px 13% ;
+  // }
+  .menu-elements,
+  .sections-wrapper{
     padding: 5% 13% ;
+    @include respond-width($w-m){
+      padding: 5% 9%;
+    }
     @include respond-width($w-m-s){
       padding: 5% 5%;
     }
-    // &.animate-in{
-    //   transition: ease all 0.3s;
-    //   opacity: 1;
-    // }
-  }
-  .contact-element{
-    pointer-events: auto;
-    padding: 5px 0px;
-  }
-
-}
-
-.menu-elements {
-  display: flex;
-  justify-content: space-between;
-  /* position: fixed; */
-}
-/* <!-- -------------------------------HEADER------------------------------------- --> */
-.header {
-  height: calc(100vh - 70px);
-  @include respond-width($w-s){
-    height: auto;
-    margin: 105px auto;
-  }
-
-}
-
-.header-text {
-  font-family: "OldStandardTT";
-  font-size: 144px;
-  letter-spacing: -5px;
-  position: relative;
-  margin: 0 auto;
-  top: 50%;
-  transform: translate(0, -50%);
-  right: 0px;
-  left: 0px;
-  // &.animate-in{
-  //   span{
-  //     transition: linear all 0.5s;
-  //     opacity: 1;
-  //     &:nth-child(1){
-  //       transition-delay: 0.15s;
-  //     }
-  //     &:nth-child(2){
-  //       transition-delay: 0.3s;
-  //     }
-  //     &:nth-child(3){
-  //       transition-delay: 0.45s;
-  //     }
-  //   }
-  // }
-  @include respond-width($w-l){
-    font-size: 130px;
-  }
-  @include respond-width($w-m){
-    font-size: 105px;
-  }
-  @include respond-width($w-m-s){
-    font-size: 95px;
-  }
-  @include respond-width($w-s){
-    top: 0px;
-    transform: translate( 0px , 0px);
-    font-size: 75px;
-  }
-  span{
-    // opacity: 0;
-    // &:nth
-  }
-}
-
-/* <!-- -------------------------------ABOUT------------------------------------- --> */
-.about {
-  font-family: "WorkSans";
-  font-size: 15px;
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 120px;
-}
-.about-header {
-  width: 15%;
-}
-
-.about-text {
-  width: 50%;
-  text-transform: uppercase;
-}
-
-/* <!-- -------------------------------SKILLS------------------------------------- --> */
-.skills {
-  font-family: "WorkSans";
-  font-size: 15px;
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 120px;
-  margin-bottom: 120px;
-}
-
-.skills-header {
-  width: 15%;
-}
-
-.skills-text {
-  width: 50%;
-  text-transform: uppercase;
-}
-
-/* <!-- -------------------------------IMG------------------------------------- --> */
-
-.img {
-  position: relative;
-  margin-bottom: 120px;
-  overflow: hidden;
-  max-width: 100%;
-  // width: 1040px;
-  height: 1200px;
-  @include respond-width($w-xl){
-    height: 1100px;
-  }
-  @include respond-width($w-l){
-    height: 1000px;
-  }
-  @include respond-width($w-m){
-    height: 780px;
-  }
-
-  .portfolio-img{
-    width: 100%;
-    height: 100%;
-    display: inline-block;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    will-change: z-index;
-    transition: linear all 0.1s;
-  }
-}
-
-/* <!-- -------------------------------PROJECTS------------------------------------- --> */
-
-.project{
-  margin-bottom: 100px;
-.project-title{
-  &:hover{
-    .project-stack{
-      span{
-        opacity: 1;
-      }
-    }
-    .project-name .comming span{
-      opacity: 1;
+    @include respond-width($w-s){
+      padding: 5% 5%;
     }
   }
-}
-  .project-name{
-    font-family: "OldStandardTT";
-    font-size: 80px;
-    margin-top: 0px;
-    width: 600px;
-    display: inline-block;
-    line-height: 100%;
-    position: relative;
-    .comming{
-      font-family: "WorkSans";
-      text-transform: uppercase;
-      line-height: 12px;
-      font-size: 16px;
-      bottom: -15px;
-      left: 0px;
-      position: absolute;
-      span{
-        transition: ease opacity 0.2s;
-        opacity: 0;
-        &:nth-child(1){
-          transition-delay: 0.25s;
-        }
-        &:nth-child(2){
-          transition-delay: 0.30s;
-        }
-      }
+
+  a{
+    cursor: none;
+    @include respond-width($w-s){
+      cursor: inherit;
     }
   }
-  .project-position,
-  .project-stack{
+
+  a:link {
+    text-decoration: none;
+    color: #333333;
+  }
+
+  a:visited {
+    color: #333333;
+  }
+
+
+  /* <!-- -------------------------------TOP MENU------------------------------------- --> */
+  .top-menu {
     font-family: "WorkSans";
     font-size: 15px;
-    text-transform: uppercase;
-    // top: 5px;
-    position: relative;
-    display: inline-block;
-    vertical-align: top;
-  }
-  .project-position{
-    margin-bottom: 20px;
-  }
-  .project-stack{
-    span{
-      transition: ease opacity 0.2s;
-      opacity: 0;
-      &:before{
-        content: '|';
-        position: relative;
-        display: inline-block;
-        vertical-align: middle;
-        padding: 4px;
-      }
-      &:nth-child(1):before{
-        content: none;
-      }
-      &:nth-child(1){
-        transition-delay: 0.05s;
-      }
-      &:nth-child(2){
-        transition-delay: 0.1s;
-      }
-      &:nth-child(3){
-        transition-delay: 0.15s;
-      }
-      &:nth-child(4){
-        transition-delay: 0.20s;
-      }
-      &:nth-child(5){
-        transition-delay: 0.25s;
-      }
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    z-index: 99;
+    pointer-events: none;
+
+    .contact-element{
+      pointer-events: auto;
+      padding: 5px 0px;
     }
+
   }
-}
-/* <!-- -------------------------------CONTACT------------------------------------- --> */
-.contact {
-  font-family: "WorkSans";
-  font-size: 15px;
-  margin-left: 50%;
-}
 
-.contact-number {
-  margin: 0px;
-}
-
-.contact-mail {
-  margin: 0px;
-}
-
-.social-media {
-  margin-top: 20px;
-  a{
-    margin-right: 15px;
+  .menu-elements {
+    display: flex;
+    justify-content: space-between;
+    /* position: fixed; */
   }
-}
+  /* <!-- -------------------------------HEADER------------------------------------- --> */
+  .header {
+    height: calc(100vh - 70px);
+    @include respond-width($w-m-s){
+      height: calc(80vh - 70px);
+      min-height: 500px;
+    }
+    @include respond-width($w-s){
+      height: auto;
+      margin: 105px auto;
+      min-height: 400px;
+    }
 
-.linkedin {
-  margin-right: 20px;
-}
-
-.github {
-  margin-right: 20px;
-}
-
-/* <!-- -------------------------------RIGHTS------------------------------------- --> */
-.rights {
-  font-family: "WorkSans";
-  font-size: 15px;
-  margin-left: 50%;
-  margin-top: 120px;
-  margin-bottom: 120px;
-  text-transform: uppercase;
-}
-
-.right-mockups {
-  margin: 0px;
-}
-
-.right-fonts {
-  margin: 0px;
-}
-
-.right-design {
-  margin: 0px;
-}
-
-/* <!-- -------------------------------YEAR FOOTER------------------------------------- --> */
-
-.year-footer{
-  text-align: center;
-  svg{
-    max-width: 100%;
-    opacity: 1;
   }
-}
+
+  .header-text {
+    font-family: "OldStandardTT";
+    font-size: 144px;
+    letter-spacing: -5px;
+    position: relative;
+    margin: 0 auto;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 0px;
+    left: 0px;
+    // &.animate-in{
+      //   span{
+        //     transition: linear all 0.5s;
+        //     opacity: 1;
+        //     &:nth-child(1){
+          //       transition-delay: 0.15s;
+          //     }
+          //     &:nth-child(2){
+            //       transition-delay: 0.3s;
+            //     }
+            //     &:nth-child(3){
+              //       transition-delay: 0.45s;
+              //     }
+              //   }
+              // }
+              @include respond-width($w-l){
+                font-size: 130px;
+              }
+              @include respond-width($w-m){
+                font-size: 105px;
+              }
+              @include respond-width($w-m-s){
+                font-size: 95px;
+              }
+              @include respond-width($w-s){
+                top: 0px;
+                transform: translate( 0px , 0px);
+                font-size: 75px;
+              }
+              span{
+                // opacity: 0;
+                // &:nth
+              }
+            }
+
+            /* <!-- -------------------------------ABOUT------------------------------------- --> */
+            // .about {
+            //   font-family: "WorkSans";
+            //   font-size: 15px;
+            //   display: flex;
+            //   justify-content: flex-end;
+            //   margin-top: 120px;
+            // }
+            // .about-header {
+            //   width: 15%;
+            // }
+            //
+            // .about-text {
+            //   width: 50%;
+            //   text-transform: uppercase;
+            //
+            // }
+
+            /* <!-- -------------------------------SKILLS------------------------------------- --> */
+
+            .about,
+            .skills {
+              font-family: "WorkSans";
+              font-size: 15px;
+              display: flex;
+              justify-content: flex-end;
+              margin-top: 120px;
+              margin-bottom: 120px;
+            }
+
+            .about-header,
+            .skills-header {
+              width: 15%;
+            }
+
+            .about-text ,
+            .skills-text {
+              width: 50%;
+              text-transform: uppercase;
+              @include respond-width($w-s){
+                width: 70%;
+              }
+            }
+
+            /* <!-- -------------------------------IMG------------------------------------- --> */
+
+            .img {
+              position: relative;
+              margin-bottom: 120px;
+              overflow: hidden;
+              max-width: 100%;
+              // width: 1040px;
+              height: 1200px;
+              @include respond-width($w-xl){
+                height: 1100px;
+              }
+              @include respond-width($w-l){
+                height: 1000px;
+              }
+              @include respond-width($w-m){
+                height: 780px;
+              }
+              @include respond-width($w-s){
+                height: 500px;
+              }
+              @include respond-width($w-xs){
+                height: 325px;
+              }
+
+              .portfolio-img{
+                width: 100%;
+                height: 100%;
+                display: inline-block;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                will-change: z-index;
+                transition: linear all 0.1s;
+              }
+            }
+
+            /* <!-- -------------------------------PROJECTS------------------------------------- --> */
+
+            .project{
+              margin-bottom: 100px;
+              .project-title{
+                &:hover{
+                  .project-stack{
+                    span{
+                      opacity: 1;
+                    }
+                  }
+                  .project-name .comming span{
+                    opacity: 1;
+                  }
+                }
+              }
+              .project-name{
+                font-family: "OldStandardTT";
+                font-size: 80px;
+                margin-top: 0px;
+                width: 600px;
+                display: inline-block;
+                line-height: 100%;
+                position: relative;
+                @include respond-width($w-l){
+                  width: 550px;
+                  font-size: 75px;
+                }
+                @include respond-width($w-m){
+                  font-size: 65px;
+                  width: 400px;
+                }
+                @include respond-width($w-m-s){
+                  font-size: 60px;
+                  width: 450px;
+                }
+                @include respond-width($w-s){
+                  width: 100%;
+                }
+                .comming{
+                  font-family: "WorkSans";
+                  text-transform: uppercase;
+                  line-height: 12px;
+                  font-size: 16px;
+                  bottom: -15px;
+                  left: 0px;
+                  position: absolute;
+                  @include respond-width($w-s){
+                    // opacity: 1;
+                    font-size: 12px;
+                    position: relative;
+                    left: inherit;
+                    right: 0px;
+                    top: 0px;
+                    bottom: inherit;
+                  }
+                  span{
+                    transition: ease opacity 0.2s;
+                    opacity: 0;
+                    @include respond-width($w-m-s){
+                      opacity: 1;
+                    }
+                    &:nth-child(1){
+                      transition-delay: 0.25s;
+                    }
+                    &:nth-child(2){
+                      transition-delay: 0.30s;
+                    }
+                  }
+                }
+              }
+              .project-position,
+              .project-stack{
+                font-family: "WorkSans";
+                font-size: 15px;
+                text-transform: uppercase;
+                position: relative;
+                display: inline-block;
+                vertical-align: top;
+              }
+              .project-position{
+                margin-bottom: 20px;
+              }
+              .project-stack{
+                span{
+                  transition: ease opacity 0.2s;
+                  opacity: 0;
+                  @include respond-width($w-m-s){
+                    opacity: 1;
+                  }
+                  &:before{
+                    content: '|';
+                    position: relative;
+                    display: inline-block;
+                    vertical-align: middle;
+                    padding: 4px;
+                  }
+                  &:nth-child(1):before{
+                    content: none;
+                  }
+                  &:nth-child(1){
+                    transition-delay: 0.05s;
+                  }
+                  &:nth-child(2){
+                    transition-delay: 0.1s;
+                  }
+                  &:nth-child(3){
+                    transition-delay: 0.15s;
+                  }
+                  &:nth-child(4){
+                    transition-delay: 0.20s;
+                  }
+                  &:nth-child(5){
+                    transition-delay: 0.25s;
+                  }
+                }
+              }
+            }
+            /* <!-- -------------------------------CONTACT------------------------------------- --> */
+            .contact {
+              font-family: "WorkSans";
+              font-size: 15px;
+              margin-left: 50%;
+              @include respond-width($w-xs){
+                margin-left: 20%;
+              }
+            }
+
+            .contact-number {
+              margin: 0px;
+            }
+
+            .contact-mail {
+              margin: 0px;
+            }
+
+            .social-media {
+              margin-top: 20px;
+              a{
+                margin-right: 15px;
+              }
+            }
+
+            .linkedin {
+              margin-right: 20px;
+            }
+
+            .github {
+              margin-right: 20px;
+            }
+
+            /* <!-- -------------------------------RIGHTS------------------------------------- --> */
+            .rights {
+              font-family: "WorkSans";
+              font-size: 15px;
+              margin-left: 50%;
+              margin-top: 120px;
+              margin-bottom: 120px;
+              text-transform: uppercase;
+              @include respond-width($w-xs){
+                margin-left: 20%;
+              }
+            }
+
+            .right-mockups {
+              margin: 0px;
+            }
+
+            .right-fonts {
+              margin: 0px;
+            }
+
+            .right-design {
+              margin: 0px;
+            }
+
+            /* <!-- -------------------------------YEAR FOOTER------------------------------------- --> */
+
+            .year-footer{
+              text-align: center;
+              svg{
+                max-width: 100%;
+                opacity: 1;
+              }
+            }

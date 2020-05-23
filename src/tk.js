@@ -1,22 +1,20 @@
 import styles from './scss/main.scss';
 import {getUserAgent} from './js/useragent.js';
 import {Scroll} from './js/scroll.js';
-import cursorDot from './js/cursor.js';
+import {cursorDot} from './js/cursor.js';
 
 let scrollInstance = new Scroll;
 
 const init = function () {
-
+  cursorDot.firstDraw();
   setTimeout(()=>{
     pageEnterAnimation();
-    // updateSectionPositions();
   }, 1000);
-
   setTimeout(()=>{ // after first animation over
     scrollInstance.init();
     portfolioImageRotate();
-  }, 750);
-
+    cursorDot.init();
+  }, 1200);
 };
 
 const pageEnterAnimation = () => {

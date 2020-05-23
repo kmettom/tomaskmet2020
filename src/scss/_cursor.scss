@@ -2,14 +2,17 @@
 .cursor-dot,
 .cursor-dot-outline {
     pointer-events: none;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     border-radius: 50%;
-    opacity: 0;
+    opacity: 1;
     transform: translate(-50%, -50%);
     transition: opacity 0.2s ease-in-out,
-                transform 0.2s ease-in-out;
+    transform 0.2s ease-in-out;
+    @include respond-width($w-s){
+      display: none;
+    }
 }
 
 .cursor-dot {

@@ -1,5 +1,5 @@
-var cursor = {
-    delay: 8,
+var cursorDot = {
+    delay: 6,
     _x: 0,
     _y: 0,
     endX: (window.innerWidth / 2),
@@ -9,11 +9,16 @@ var cursor = {
     $dot: document.querySelector('#cursorDot'),
     $outline: document.querySelector('#cursorDotOutline'),
 
+    firstDraw: function (){
+      this.dotSize = this.$dot.offsetWidth;
+      this.outlineSize = this.$outline.offsetWidth;
+      this.animateDotOutline();
+    },
     init: function() {
         this.dotSize = this.$dot.offsetWidth;
         this.outlineSize = this.$outline.offsetWidth;
-        this.setupEventListeners();
         this.animateDotOutline();
+        this.setupEventListeners();
     },
 
     setupEventListeners: function() {
@@ -101,4 +106,4 @@ var cursor = {
     }
 }
 
-cursor.init();
+export {cursorDot};
