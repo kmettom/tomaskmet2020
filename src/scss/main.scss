@@ -33,6 +33,9 @@ body {
   @include respond-width($w-s){
     cursor: auto;
   }
+  @include respond-width($w-xs){
+    height: auto;
+  }
 }
 
 #scrollContainer{
@@ -99,11 +102,19 @@ a:visited {
 
   .contact-element{
     pointer-events: auto;
-    padding: 5px 0px;
-    @include respond-width($w-xs){
-      padding: 0px 0px;
-    }
+    padding: 0px 0px;
+    // padding: 5px 0px;
+  }
 
+  .available-wrapper{
+    @include respond-width($w-xs){
+       text-align: center;
+    }
+  }
+  .available-txt{
+    @include respond-width($w-xs){
+      display: block;
+    }
   }
 
 }
@@ -429,9 +440,23 @@ a:visited {
 /* <!-- -------------------------------YEAR FOOTER------------------------------------- --> */
 
 .year-footer{
+  font-family: "OldStandardTT";
   text-align: center;
-  svg{
-    max-width: 100%;
-    opacity: 1;
+  font-size: 30vw;
+  color: black;
+  position: relative;
+  max-width: 80vw;
+  margin: 0 auto;
+  text-align: center;
+  letter-spacing: -1vw;
+  .year-footer-c {
+    position: absolute;
+    top: 4vw;
+    left: 0px;
+    font-size: 10vw;
+  }
+  .year-footer-y{
+    display: block;
+    padding-left: 7vw;
   }
 }

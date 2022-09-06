@@ -2,20 +2,28 @@ import styles from './scss/main.scss';
 import {getUserAgent} from './js/useragent.js';
 import {Scroll} from './js/scroll.js';
 import {cursorDot} from './js/cursor.js';
-
 let scrollInstance = new Scroll;
 
 const init = function () {
+  setYear();
   cursorDot.firstDraw();
   setTimeout(()=>{
     pageEnterAnimation();
   }, 1000);
   setTimeout(()=>{ // after first animation over
-    scrollInstance.init();
+    if(window.innerWidth > 550){
+      scrollInstance.init();
+    }
     portfolioImageRotate();
     cursorDot.init();
   }, 1200);
 };
+
+const setYear = () => {
+  const date =  new Date().getFullYear();
+
+  // console.log(date);
+}
 
 const pageEnterAnimation = () => {
   document.getElementById('firstAnimationOverlay').classList.add('hide');
