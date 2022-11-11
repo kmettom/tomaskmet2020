@@ -1,8 +1,10 @@
 import styles from './scss/main.scss';
 import {getUserAgent} from './js/useragent.js';
 import {cursorDot} from './js/cursor.js';
-import {Scroll} from './js/scroll.js';
-let scrollInstance = new Scroll;
+// import {Scroll} from './js/scroll.js';
+// let scrollInstance = new Scroll;
+
+import {Canvas} from './js/canvas.js'
 
 const init = function () {
   setYear();
@@ -12,9 +14,10 @@ const init = function () {
   }, 1000);
   setTimeout(()=>{ // after first animation over
     if(window.innerWidth > 550){
-      scrollInstance.init();
+      Canvas.canvasInit();
+    }else {
+      portfolioImageRotate();
     }
-    portfolioImageRotate();
     cursorDot.init();
   }, 1200);
 };
