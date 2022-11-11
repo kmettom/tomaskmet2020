@@ -1,7 +1,7 @@
 import styles from './scss/main.scss';
 import {getUserAgent} from './js/useragent.js';
-import {Scroll} from './js/scroll.js';
 import {cursorDot} from './js/cursor.js';
+import {Scroll} from './js/scroll.js';
 let scrollInstance = new Scroll;
 
 const init = function () {

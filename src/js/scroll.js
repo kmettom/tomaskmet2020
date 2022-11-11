@@ -1,5 +1,6 @@
 
 import {getUserAgent} from './useragent.js';
+import {Canvas} from './slideshow.js';
 
 class Scroll{
   constructor() {
