@@ -87,7 +87,7 @@ a:visited {
 
 /* <!-- -------------------------------TOP MENU------------------------------------- --> */
 .top-menu {
-  font-family: "WorkSans";
+  font-family: "WorkSans" , sans-serif;
   font-size: 15px;
   position: fixed;
   top: 0px;
@@ -144,7 +144,7 @@ a:visited {
 }
 
 .header-text {
-  font-family: "OldStandardTT";
+  font-family: "OldStandardTT", serif;
   font-size: 144px;
   letter-spacing: -5px;
   position: relative;
@@ -177,7 +177,7 @@ a:visited {
 
 .about,
 .skills {
-  font-family: "WorkSans";
+  font-family: "WorkSans" , sans-serif;
   font-size: 15px;
   display: flex;
   justify-content: flex-end;
@@ -266,7 +266,7 @@ a:visited {
     }
   }
   .project-name{
-    font-family: "OldStandardTT";
+    font-family: "OldStandardTT", serif;
     font-size: 80px;
     margin-top: 0px;
     width: 600px;
@@ -292,7 +292,7 @@ a:visited {
       font-size: 50px;
     }
     .comming{
-      font-family: "WorkSans";
+      font-family: "WorkSans" , sans-serif;
       text-transform: uppercase;
       line-height: 12px;
       font-size: 16px;
@@ -325,7 +325,7 @@ a:visited {
   }
   .project-position,
   .project-stack{
-    font-family: "WorkSans";
+    font-family: "WorkSans" , sans-serif;
     font-size: 15px;
     text-transform: uppercase;
     position: relative;
@@ -379,7 +379,7 @@ a:visited {
 }
 /* <!-- -------------------------------CONTACT------------------------------------- --> */
 .contact {
-  font-family: "WorkSans";
+  font-family: "WorkSans" , sans-serif;
   font-size: 15px;
   margin-left: 50%;
   @include respond-width($w-xs){
@@ -412,7 +412,7 @@ a:visited {
 
 /* <!-- -------------------------------RIGHTS------------------------------------- --> */
 .rights {
-  font-family: "WorkSans";
+  font-family: "WorkSans" , sans-serif;
   font-size: 15px;
   margin-left: 50%;
   margin-top: 120px;
@@ -440,7 +440,7 @@ a:visited {
 /* <!-- -------------------------------YEAR FOOTER------------------------------------- --> */
 
 .year-footer{
-  font-family: "OldStandardTT";
+  font-family: "OldStandardTT", serif;
   text-align: center;
   font-size: 30vw;
   color: black;
