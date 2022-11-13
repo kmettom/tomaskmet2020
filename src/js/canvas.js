@@ -37,19 +37,10 @@ class CanvasClass{
   this.imageStore = [];
 
   this.options = {
-    gallery: {
+    basic: {
       fragmentShader: galleryFragment,
       vertexShader: galleryVertex,
     },
-    thumb: {
-      fragmentShader: thumbFragment,
-      vertexShader: thumbVertex,
-    },
-    imagegallery: {
-      fragmentShader: imageGalleryFragment,
-      vertexShader: imageGalleryVertex,
-    },
-
   }
 
 }
@@ -96,6 +87,12 @@ canvasInit(){
     this.pointer.cursor.x = ( event.clientX / window.innerWidth ) * 2 - 1;
     this.pointer.cursor.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
   });
+
+  const $imagesToMesh = document.getElementsByClassName("portfolio-img");
+  for (var i = 0; i < $imagesToMesh.length; i++) {
+    this.addImageMesh("basic" , "i_" + i , $imagesToMesh[i] );
+  }
+
 }
 setSize(){
   this.width = this.container.offsetWidth;

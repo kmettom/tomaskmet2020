@@ -18,7 +18,7 @@ const init = function () {
     }else {
       portfolioImageRotate();
     }
-    cursorDot.init();
+    // cursorDot.init();
   }, 1200);
 };
 
