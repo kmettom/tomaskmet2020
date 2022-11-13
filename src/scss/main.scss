@@ -38,11 +38,22 @@ body {
   }
 }
 
+// #scrollContainer{
+//   margin: 0px;
+//   padding: 0px;
+//   will-change: transform;
+// }
+
 #scrollContainer{
-  margin: 0px;
-  padding: 0px;
-  will-change: transform;
+margin: 0px;
+padding: 0px;
+display: block;
+position: relative;
 }
+#scrollableContainer{
+will-change: transform;
+}
+
 
 #cursorElement{
   transition: ease all 0.1s;

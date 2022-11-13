@@ -4,14 +4,14 @@ import gsap from 'gsap';
 import Scroll from './scroll.js';
 
 
-// import imageGalleryFragment from './shaders/imageGalleryFragment.glsl';
-// import imageGalleryVertex from './shaders/imageGalleryVertex.glsl';
-// import galleryFragment from './shaders/galleryFragment.glsl';
-// import galleryVertex from './shaders/galleryVertex.glsl';
-// import thumbFragment from './shaders/thumbFragment.glsl';
-// import thumbVertex from './shaders/thumbVertex.glsl';
-// import scrollFragment from './shaders/scrollFragment.glsl';
-// import scrollVertex from './shaders/scrollVertex.glsl';
+import imageGalleryFragment from './shaders/imageGalleryFragment.glsl';
+import imageGalleryVertex from './shaders/imageGalleryVertex.glsl';
+import galleryFragment from './shaders/galleryFragment.glsl';
+import galleryVertex from './shaders/galleryVertex.glsl';
+import thumbFragment from './shaders/thumbFragment.glsl';
+import thumbVertex from './shaders/thumbVertex.glsl';
+import scrollFragment from './shaders/scrollFragment.glsl';
+import scrollVertex from './shaders/scrollVertex.glsl';
 
 
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
@@ -36,21 +36,21 @@ class CanvasClass{
   this.materials = [];
   this.imageStore = [];
 
-  // this.options = {
-  //   gallery: {
-  //     fragmentShader: galleryFragment,
-  //     vertexShader: galleryVertex,
-  //   },
-  //   thumb: {
-  //     fragmentShader: thumbFragment,
-  //     vertexShader: thumbVertex,
-  //   },
-  //   imagegallery: {
-  //     fragmentShader: imageGalleryFragment,
-  //     vertexShader: imageGalleryVertex,
-  //   },
-  //
-  // }
+  this.options = {
+    gallery: {
+      fragmentShader: galleryFragment,
+      vertexShader: galleryVertex,
+    },
+    thumb: {
+      fragmentShader: thumbFragment,
+      vertexShader: thumbVertex,
+    },
+    imagegallery: {
+      fragmentShader: imageGalleryFragment,
+      vertexShader: imageGalleryVertex,
+    },
+
+  }
 
 }
 canvasInit(){
@@ -87,8 +87,6 @@ canvasInit(){
   this.scroll = new Scroll({
     dom: document.getElementById('scrollContainer'),
   });
-
-  this.setLight()
 
   this.composerPass()
 
@@ -147,8 +145,8 @@ addImageMesh( _type , _id , _img){
         aniOutImageGallery: {value: 0},
         galleryActive: {value: 0},
       },
-      // fragmentShader: this.options[_type].fragmentShader,
-      // vertexShader: this.options[_type].vertexShader,
+      fragmentShader: this.options[_type].fragmentShader,
+      vertexShader: this.options[_type].vertexShader,
       transparent: true,
       name: _id,
       // opacity: 0.1,
@@ -257,36 +255,34 @@ setImageMeshPositions(){
 
     console.log("render");
 
-  // this.time+=0.05;
-  //
-  // this.scroll.render();
-  // this.scrollInProgress = this.currentScroll != this.scroll.scrollToRender ;
-  // this.currentScroll = this.scroll.scrollToRender;
-  //
-  // // update image mesh positions on resize
-  // if(this.resizeInProgress){
-  //   this.resetImageMeshPosition();
-  // }
-  // //animate on scroll
-  // if(
-  //   this.scrollInProgress
-  //   || ( 0 < this.galleryActive.value && this.galleryActive.value < 1)
-  //   || this.thumbToArticleAnimation
-  // ){
-  //   this.customPass.uniforms.scrollSpeed.value = this.scroll.speedTarget;
-  //   this.setImageMeshPositions();
-  // }
-  //
-  // //animate on hover
-  // if(this.hoverInProgress){
-  //   for (var i = 0; i < this.materials.length; i++) {
-  //     this.materials[i].uniforms.time.value = this.time;
-  //   }
-  // }
-  //
-  // this.checkGalleryImageHovers()
-  //
-  // this.composer.render()
+  this.time+=0.05;
+
+  this.scroll.render();
+  this.scrollInProgress = this.currentScroll != this.scroll.scrollToRender ;
+  this.currentScroll = this.scroll.scrollToRender;
+
+  // update image mesh positions on resize
+  if(this.resizeInProgress){
+    this.resetImageMeshPosition();
+  }
+  //animate on scroll
+  if(
+    this.scrollInProgress
+    || ( 0 < this.galleryActive.value && this.galleryActive.value < 1)
+    || this.thumbToArticleAnimation
+  ){
+    this.customPass.uniforms.scrollSpeed.value = this.scroll.speedTarget;
+    this.setImageMeshPositions();
+  }
+
+  //animate on hover
+  if(this.hoverInProgress){
+    for (var i = 0; i < this.materials.length; i++) {
+      this.materials[i].uniforms.time.value = this.time;
+    }
+  }
+
+  this.composer.render()
 
   }
 
