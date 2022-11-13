@@ -9,7 +9,6 @@ export default class Scroll{
     // we translate this element when scrolling (y-axis)
     this.DOM.scrollable = this.DOM.main.querySelector("#scrollableContainer");
     // this.DOM.scrollable = this.DOM.main.querySelector("div[data-scroll]");
-    console.log("this.DOM.scrollable" , this.DOM.scrollable, this.DOM );
     this.docScroll = 0;
     this.scrollToRender = 0;
     this.current = 0;
@@ -28,9 +27,6 @@ export default class Scroll{
   }
 
   init(){
-
-    // console.log("SCROLL - " , this.DOM.scrollable);
-    // console.log("SCROLL - " , this.DOM.scrollable);
     // sets the initial value (no interpolation) - translate the scroll value
     for (const key in this.renderedStyles) {
       this.current = this.scrollToRender = this.getScroll();

@@ -44,6 +44,19 @@ body {
 //   will-change: transform;
 // }
 
+#tkAnimationContainer {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  margin: 0 auto;
+  border: 1px solid purple;
+  pointer-events: none;
+  z-index: -1;
+}
+
 #scrollContainer{
 margin: 0px;
 padding: 0px;

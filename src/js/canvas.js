@@ -253,36 +253,37 @@ setImageMeshPositions(){
   }
   render () {
 
-    console.log("render");
 
-  this.time+=0.05;
+    this.time+=0.05;
 
-  this.scroll.render();
-  this.scrollInProgress = this.currentScroll != this.scroll.scrollToRender ;
-  this.currentScroll = this.scroll.scrollToRender;
+    this.scroll.render();
+    this.scrollInProgress = this.currentScroll != this.scroll.scrollToRender ;
+    this.currentScroll = this.scroll.scrollToRender;
 
-  // update image mesh positions on resize
-  if(this.resizeInProgress){
-    this.resetImageMeshPosition();
-  }
-  //animate on scroll
-  if(
-    this.scrollInProgress
-    || ( 0 < this.galleryActive.value && this.galleryActive.value < 1)
-    || this.thumbToArticleAnimation
-  ){
-    this.customPass.uniforms.scrollSpeed.value = this.scroll.speedTarget;
-    this.setImageMeshPositions();
-  }
-
-  //animate on hover
-  if(this.hoverInProgress){
-    for (var i = 0; i < this.materials.length; i++) {
-      this.materials[i].uniforms.time.value = this.time;
+    // update image mesh positions on resize
+    if(this.resizeInProgress){
+      this.resetImageMeshPosition();
     }
-  }
+    //animate on scroll
+    if(
+      this.scrollInProgress
+      || ( 0 < this.galleryActive.value && this.galleryActive.value < 1)
+      || this.thumbToArticleAnimation
+    ){
+      this.customPass.uniforms.scrollSpeed.value = this.scroll.speedTarget;
+      this.setImageMeshPositions();
+    }
 
-  this.composer.render()
+    //animate on hover
+    if(this.hoverInProgress){
+      for (var i = 0; i < this.materials.length; i++) {
+        this.materials[i].uniforms.time.value = this.time;
+      }
+    }
+
+    this.composer.render()
+    window.requestAnimationFrame(this.render.bind(this));
+
 
   }
 
