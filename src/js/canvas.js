@@ -59,27 +59,12 @@ canvasInit(){
     imagesLoaded(document.querySelectorAll(".portfolio-img"), { background: true }, resolve);
   });
 
-
   Promise.all([preloadImages]).then(()=>{
-
-    this.addImages();
-
-    // const $imagesToMesh = document.getElementsByClassName("portfolio-img");
-
+    const $imagesToMesh = document.querySelectorAll(".portfolio-img");
     // this.addImageMesh("basic" , "i_" + 0 , this.images[0] );
-
-    // for (var i = 0; i < $imagesToMesh.length; i++) {
-    //   if($imagesToMesh[i].getBoundingClientRect().height > 0){
-    //     console.log("Add IMG 1");
-    //     this.addImageMesh("basic" , "i_" + i , $imagesToMesh[i] );
-    //   }else {
-    //     $imagesToMesh[i].addEventListener("onload" , (event) => {
-    //       console.log("Add IMG 2" , $imagesToMesh[i] );
-    //       this.addImageMesh("basic" , "i_" + i , $imagesToMesh[i] );
-    //     })
-    //   }
-    // }
-
+    for (var i = 0; i < $imagesToMesh.length; i++) {
+      this.addImageMesh( "imageId_" + i , $imagesToMesh[i] );
+    }
   })
 
   this.width = this.container.offsetWidth;
@@ -132,24 +117,16 @@ setSize(){
   this.camera.aspect = this.width/this.height;
   this.camera.updateProjectionMatrix();
 }
-meshAniIn(_mesh, _material, _type) {
-  const min = 1;
-  const max = _type == "gallery" ? 1000:500;
-  const randomize = Math.floor(Math.random() * (max - min + 1) + min);
-  setTimeout( () => {
-    gsap.to(_material.uniforms.aniIn , {
-      duration: _type == "gallery" ? 2 : 1.25,
-      value: 1
-    })
-  } , randomize)
-
+meshAniIn(_mesh, _material) {
+  gsap.to(_material.uniforms.aniIn , {
+    duration: 1.25,
+    value: 1
+  })
 }
 meshMouseListeners(_mesh, _material) {
 
   _mesh.img.addEventListener('mouseenter',(event)=>{
-    _mesh.mesh.renderOrder = 1;
     this.hoverInProgress = true;
-
     gsap.to(_material.uniforms.hoverState, {
       duration: 0.5,
       value:1
@@ -157,10 +134,7 @@ meshMouseListeners(_mesh, _material) {
   })
 
   _mesh.img.addEventListener('mouseout',()=>{
-    _mesh.mesh.renderOrder = 0;
-
     this.hoverInProgress = false;
-
     gsap.to(_material.uniforms.hoverState,{
       duration: 0.5,
       value:0
@@ -168,79 +142,12 @@ meshMouseListeners(_mesh, _material) {
   })
 
 }
-addImages(){
-  this.material = new THREE.ShaderMaterial({
-    uniforms:{
-      time: {value:0},
-      uImage: {value:0},
-      hover: {value: new THREE.Vector2(0.5,0.5)},
-      hoverState: {value: 0},
-      // oceanTexture: {value: new THREE.TextureLoader().load(ocean)},
-    },
-    // side: THREE.DoubleSide,
-    fragmentShader: fragment,
-    vertexShader: vertex,
-    // wireframe: true
-  })
 
-  this.materials = []
+addImageMesh( _id , _img){
 
-  this.imageStore = this.images.map(img=>{
+  console.log("addImageMesh" , _id , _img);
 
-
-    let bounds = img.getBoundingClientRect()
-    console.log(bounds);
-
-    let geometry = new THREE.PlaneBufferGeometry(bounds.width,bounds.height,10,10);
-    let texture = new THREE.Texture(img);
-    texture.needsUpdate = true;
-    // let material = new THREE.MeshBasicMaterial({
-    //       color: 0xff0000,
-    //       // map: texture
-    //   })
-
-      let material = this.material.clone();
-
-      img.addEventListener('mouseenter',()=>{
-        gsap.to(material.uniforms.hoverState,{
-          duration:1,
-          value:1,
-          ease: "power3.out"
-        })
-      })
-      img.addEventListener('mouseout',()=>{
-        gsap.to(material.uniforms.hoverState,{
-          duration:1,
-          value:0,
-          ease: "power3.out"
-        })
-      })
-
-      this.materials.push(material)
-
-      // material.uniforms.uImage.value = texture;
-
-      let mesh = new THREE.Mesh(geometry,material);
-
-      this.scene.add(mesh);
-
-      return {
-        img: img,
-        mesh: mesh,
-        top: bounds.top,
-        left: bounds.left,
-        width: bounds.width,
-        height: bounds.height
-      }
-    })
-
-  }
-
-addImageMesh( _type , _id , _img){
-
-  console.log("_type , _id , _img" , _type , _id , _img);
-
-  _img.style.opacity = 0;
+  // _img.style.opacity = 0;
     let fragmentShader;
     let vertexShader;
     let geometry;
@@ -265,8 +172,8 @@ addImageMesh( _type , _id , _img){
         aniIn: {value: 0},
         aniOut: {value: 0},
       },
-      fragmentShader: this.options[_type].fragmentShader,
-      vertexShader: this.options[_type].vertexShader,
+      fragmentShader: fragment,
+      vertexShader: vertex,
       transparent: true,
       name: _id,
       // opacity: 0.1,
@@ -295,7 +202,7 @@ addImageMesh( _type , _id , _img){
 
     this.imageStore.push(newMesh);
     this.meshMouseListeners(newMesh, material);
-    this.meshAniIn(newMesh, material, _type);
+    this.meshAniIn(newMesh, material);
     this.scroll.setSize();
 
     let meshIndex = this.imageStore.length -1;
