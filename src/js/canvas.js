@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import gsap from 'gsap';
 import Scroll from './scroll.js';
-
+import imagesLoaded from 'imagesloaded';
 
 import imageGalleryFragment from './shaders/imageGalleryFragment.glsl';
 import imageGalleryVertex from './shaders/imageGalleryVertex.glsl';
@@ -12,6 +12,8 @@ import thumbFragment from './shaders/thumbFragment.glsl';
 import thumbVertex from './shaders/thumbVertex.glsl';
 import scrollFragment from './shaders/scrollFragment.glsl';
 import scrollVertex from './shaders/scrollVertex.glsl';
+import fragment from './shaders/fragment.glsl';
+import vertex from './shaders/vertex.glsl';
 
 
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
@@ -23,7 +25,6 @@ class CanvasClass{
 
   this.scrollInProgress = false;
   this.galleryActive = {value:0}; // false
-  this.thumbToArticleAnimation = false;
   this.resizeInProgress = false;
   this.hoverInProgress = true;
   this.container = options.dom;
@@ -43,8 +44,43 @@ class CanvasClass{
     },
   }
 
+  this.images = [...document.querySelectorAll('.portfolio-img')];
+
+  console.log("Canvas CONSTRUCTOR");
+
+
 }
 canvasInit(){
+
+  console.log("CANVAS INIT");
+
+  // Preload images
+  const preloadImages = new Promise((resolve, reject) => {
+    imagesLoaded(document.querySelectorAll(".portfolio-img"), { background: true }, resolve);
+  });
+
+
+  Promise.all([preloadImages]).then(()=>{
+
+    this.addImages();
+
+    // const $imagesToMesh = document.getElementsByClassName("portfolio-img");
+
+    // this.addImageMesh("basic" , "i_" + 0 , this.images[0] );
+
+    // for (var i = 0; i < $imagesToMesh.length; i++) {
+    //   if($imagesToMesh[i].getBoundingClientRect().height > 0){
+    //     console.log("Add IMG 1");
+    //     this.addImageMesh("basic" , "i_" + i , $imagesToMesh[i] );
+    //   }else {
+    //     $imagesToMesh[i].addEventListener("onload" , (event) => {
+    //       console.log("Add IMG 2" , $imagesToMesh[i] );
+    //       this.addImageMesh("basic" , "i_" + i , $imagesToMesh[i] );
+    //     })
+    //   }
+    // }
+
+  })
 
   this.width = this.container.offsetWidth;
   this.height = this.container.offsetHeight;
@@ -79,7 +115,7 @@ canvasInit(){
     dom: document.getElementById('scrollContainer'),
   });
 
-  this.composerPass()
+  this.composerPass();
 
   this.render();
 
@@ -87,11 +123,6 @@ canvasInit(){
     this.pointer.cursor.x = ( event.clientX / window.innerWidth ) * 2 - 1;
     this.pointer.cursor.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
   });
-
-  const $imagesToMesh = document.getElementsByClassName("portfolio-img");
-  for (var i = 0; i < $imagesToMesh.length; i++) {
-    this.addImageMesh("basic" , "i_" + i , $imagesToMesh[i] );
-  }
 
 }
 setSize(){
@@ -113,7 +144,103 @@ meshAniIn(_mesh, _material, _type) {
   } , randomize)
 
 }
+meshMouseListeners(_mesh, _material) {
+
+  _mesh.img.addEventListener('mouseenter',(event)=>{
+    _mesh.mesh.renderOrder = 1;
+    this.hoverInProgress = true;
+
+    gsap.to(_material.uniforms.hoverState, {
+      duration: 0.5,
+      value:1
+    })
+  })
+
+  _mesh.img.addEventListener('mouseout',()=>{
+    _mesh.mesh.renderOrder = 0;
+
+    this.hoverInProgress = false;
+
+    gsap.to(_material.uniforms.hoverState,{
+      duration: 0.5,
+      value:0
+    })
+  })
+
+}
+addImages(){
+  this.material = new THREE.ShaderMaterial({
+    uniforms:{
+      time: {value:0},
+      uImage: {value:0},
+      hover: {value: new THREE.Vector2(0.5,0.5)},
+      hoverState: {value: 0},
+      // oceanTexture: {value: new THREE.TextureLoader().load(ocean)},
+    },
+    // side: THREE.DoubleSide,
+    fragmentShader: fragment,
+    vertexShader: vertex,
+    // wireframe: true
+  })
+
+  this.materials = []
+
+  this.imageStore = this.images.map(img=>{
+
+
+    let bounds = img.getBoundingClientRect()
+    console.log(bounds);
+
+    let geometry = new THREE.PlaneBufferGeometry(bounds.width,bounds.height,10,10);
+    let texture = new THREE.Texture(img);
+    texture.needsUpdate = true;
+    // let material = new THREE.MeshBasicMaterial({
+    //       color: 0xff0000,
+    //       // map: texture
+    //   })
+
+      let material = this.material.clone();
+
+      img.addEventListener('mouseenter',()=>{
+        gsap.to(material.uniforms.hoverState,{
+          duration:1,
+          value:1,
+          ease: "power3.out"
+        })
+      })
+      img.addEventListener('mouseout',()=>{
+        gsap.to(material.uniforms.hoverState,{
+          duration:1,
+          value:0,
+          ease: "power3.out"
+        })
+      })
+
+      this.materials.push(material)
+
+      // material.uniforms.uImage.value = texture;
+
+      let mesh = new THREE.Mesh(geometry,material);
+
+      this.scene.add(mesh);
+
+      return {
+        img: img,
+        mesh: mesh,
+        top: bounds.top,
+        left: bounds.left,
+        width: bounds.width,
+        height: bounds.height
+      }
+    })
+
+  }
+
 addImageMesh( _type , _id , _img){
+
+  console.log("_type , _id , _img" , _type , _id , _img);
+
+  _img.style.opacity = 0;
     let fragmentShader;
     let vertexShader;
     let geometry;
@@ -137,10 +264,6 @@ addImageMesh( _type , _id , _img){
         cursorPositionY: {value: 0},
         aniIn: {value: 0},
         aniOut: {value: 0},
-        aniOutToArticle: {value: 0},
-        aniInImageGallery: {value: 0},
-        aniOutImageGallery: {value: 0},
-        galleryActive: {value: 0},
       },
       fragmentShader: this.options[_type].fragmentShader,
       vertexShader: this.options[_type].vertexShader,
@@ -168,7 +291,6 @@ addImageMesh( _type , _id , _img){
       left: position.left,
       width: bounds.width,
       height: bounds.height,
-      thumbOutAction: {value: 0},
     }
 
     this.imageStore.push(newMesh);
@@ -213,10 +335,9 @@ setImageMeshPositions(){
           || this.galleryActive.value !== 0
         ){
 
-          this.imageStore[i].mesh.position.x = ( this.imageStore[i].left * ( 1 - this.galleryActive.value ) - this.width/2 + this.imageStore[i].width/2) * ( 1 - this.imageStore[i].thumbOutAction.value/1.5) ;
+          this.imageStore[i].mesh.position.x = ( this.imageStore[i].left - this.width/2 + this.imageStore[i].width/2) ;
 
-          let galAni = this.galleryActive.value === 0 ? 0 : (  + this.imageStore[i].top - this.imageStore[i].height * i ) * this.galleryActive.value ;
-          this.imageStore[i].mesh.position.y = (this.currentScroll + galAni - this.imageStore[i].top + this.height/2 - this.imageStore[i].height/2) * ( 1 - this.imageStore[i].thumbOutAction.value/1.5);
+          this.imageStore[i].mesh.position.y = (this.currentScroll - this.imageStore[i].top + this.height/2 - this.imageStore[i].height/2) ;
 
         }
         else {
@@ -264,8 +385,6 @@ setImageMeshPositions(){
     //animate on scroll
     if(
       this.scrollInProgress
-      || ( 0 < this.galleryActive.value && this.galleryActive.value < 1)
-      || this.thumbToArticleAnimation
     ){
       this.customPass.uniforms.scrollSpeed.value = this.scroll.speedTarget;
       this.setImageMeshPositions();
