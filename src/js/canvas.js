@@ -24,11 +24,9 @@ class CanvasClass{
   constructor(options){
 
   this.scrollInProgress = false;
-  this.galleryActive = {value:0}; // false
   this.resizeInProgress = false;
   this.hoverInProgress = true;
   this.container = options.dom;
-  this.pointer = {cursor: null , intersects: null };
   // this.container = options.dom;
 
   this.time = 0;
@@ -37,33 +35,21 @@ class CanvasClass{
   this.materials = [];
   this.imageStore = [];
 
-  this.options = {
-    basic: {
-      fragmentShader: galleryFragment,
-      vertexShader: galleryVertex,
-    },
-  }
-
-  this.images = [...document.querySelectorAll('.portfolio-img')];
-
-  console.log("Canvas CONSTRUCTOR");
-
+  this.images = [ ...document.querySelectorAll(".portfolio-img") ];
 
 }
 canvasInit(){
-
-  console.log("CANVAS INIT");
 
   // Preload images
   const preloadImages = new Promise((resolve, reject) => {
     imagesLoaded(document.querySelectorAll(".portfolio-img"), { background: true }, resolve);
   });
 
-  Promise.all([preloadImages]).then(()=>{
-    const $imagesToMesh = document.querySelectorAll(".portfolio-img");
-    // this.addImageMesh("basic" , "i_" + 0 , this.images[0] );
-    for (var i = 0; i < $imagesToMesh.length; i++) {
-      this.addImageMesh( "imageId_" + i , $imagesToMesh[i] );
+  Promise.all([preloadImages]).then(() => {
+
+    // this.addImageMesh(0 , "i_" + 0 , this.images[0] );
+    for (var i = 0; i < this.images.length; i++) {
+      this.addImageMesh( i, "imageId_" + i , this.images[i] );
     }
   })
 
@@ -92,7 +78,6 @@ canvasInit(){
 
   this.currentScroll = 0;
   this.raycaster = new THREE.Raycaster();
-  this.pointer.cursor = new THREE.Vector2();
 
   this.setSize();
 
@@ -103,12 +88,6 @@ canvasInit(){
   this.composerPass();
 
   this.render();
-
-  window.addEventListener('pointermove', (event) => {
-    this.pointer.cursor.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-    this.pointer.cursor.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-  });
-
 }
 setSize(){
   this.width = this.container.offsetWidth;
@@ -117,11 +96,21 @@ setSize(){
   this.camera.aspect = this.width/this.height;
   this.camera.updateProjectionMatrix();
 }
-meshAniIn(_mesh, _material) {
-  gsap.to(_material.uniforms.aniIn , {
-    duration: 1.25,
-    value: 1
-  })
+meshAniInOut(_index, _mesh, _material) {
+  const oneImgTime = 2.5; // no effect
+  const aniInTime = 1.75;
+
+  gsap.fromTo(_material.uniforms.aniInOut , {
+    value: 0,
+  }, {
+    delay: 0,
+    duration: aniInTime,
+    value: 1,
+    repeat: -1,
+    repeatDelay: oneImgTime,
+    yoyo: true,
+  });
+
 }
 meshMouseListeners(_mesh, _material) {
 
@@ -143,11 +132,9 @@ meshMouseListeners(_mesh, _material) {
 
 }
 
-addImageMesh( _id , _img){
+addImageMesh(_index, _id , _img){
 
-  console.log("addImageMesh" , _id , _img);
-
-  // _img.style.opacity = 0;
+  _img.style.opacity = 0;
     let fragmentShader;
     let vertexShader;
     let geometry;
@@ -167,15 +154,14 @@ addImageMesh( _id , _img){
         vectorVNoise: {value: new THREE.Vector2( 1.5 , 1.5 )}, // 1.5
         vectorWave: {value: new THREE.Vector2( 0.5 , 0.5 )}, // 0.5
         hoverState: {value: 0},
-        cursorPositionX: {value: 0},
-        cursorPositionY: {value: 0},
-        aniIn: {value: 0},
-        aniOut: {value: 0},
+        hover: {value: new THREE.Vector2(0.5,0.5)},
+        aniInOut: {value: 0},
       },
+      side: THREE.DoubleSide,
       fragmentShader: fragment,
       vertexShader: vertex,
-      transparent: true,
       name: _id,
+      transparent: true,
       // opacity: 0.1,
       // side: THREE.DoubleSide,
       // wireframe: true
@@ -202,7 +188,7 @@ addImageMesh( _id , _img){
 
     this.imageStore.push(newMesh);
     this.meshMouseListeners(newMesh, material);
-    this.meshAniIn(newMesh, material);
+    this.meshAniInOut(_index, newMesh, material);
     this.scroll.setSize();
 
     let meshIndex = this.imageStore.length -1;
@@ -232,25 +218,15 @@ setImageMeshPositions(){
 
     for (var i = 0; i < this.imageStore.length ; i++) {
 
-      if(this.imageStore[i].mesh.name.includes("imagegallery") ){
-        this.imageStore[i].mesh.position.x = this.imageStore[i].left - this.width/2 + this.imageStore[i].width/2 ;
-      }else {
-
-        if(
-          this.currentScroll < this.imageStore[i].top + this.imageStore[i].height
-          && this.imageStore[i].top  < this.currentScroll + this.height
-          || this.galleryActive.value !== 0
-        ){
-
-          this.imageStore[i].mesh.position.x = ( this.imageStore[i].left - this.width/2 + this.imageStore[i].width/2) ;
-
-          this.imageStore[i].mesh.position.y = (this.currentScroll - this.imageStore[i].top + this.height/2 - this.imageStore[i].height/2) ;
-
-        }
-        else {
-          this.imageStore[i].mesh.position.y = this.height*2;
-        }
-
+      if(
+        this.currentScroll < this.imageStore[i].top + this.imageStore[i].height
+        && this.imageStore[i].top  < this.currentScroll + this.height
+      ){
+        this.imageStore[i].mesh.position.x = ( this.imageStore[i].left - this.width/2 + this.imageStore[i].width/2) ;
+        this.imageStore[i].mesh.position.y = (this.currentScroll - this.imageStore[i].top + this.height/2 - this.imageStore[i].height/2) ;
+      }
+      else {
+        this.imageStore[i].mesh.position.y = this.height*2;
       }
 
     }
@@ -278,7 +254,6 @@ setImageMeshPositions(){
   }
   render () {
 
-
     this.time+=0.05;
 
     this.scroll.render();
@@ -296,17 +271,15 @@ setImageMeshPositions(){
       this.customPass.uniforms.scrollSpeed.value = this.scroll.speedTarget;
       this.setImageMeshPositions();
     }
-
     //animate on hover
-    if(this.hoverInProgress){
+    // if(this.hoverInProgress){
       for (var i = 0; i < this.materials.length; i++) {
         this.materials[i].uniforms.time.value = this.time;
       }
-    }
+    // }
 
     this.composer.render()
     window.requestAnimationFrame(this.render.bind(this));
-
 
   }
 

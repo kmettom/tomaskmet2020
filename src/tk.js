@@ -15,7 +15,7 @@ const init = function () {
   setTimeout(()=>{ // after first animation over
     if(window.innerWidth > 550){
       Canvas.canvasInit();
-    }else {
+    } else {
       portfolioImageRotate();
     }
     // cursorDot.init();
@@ -24,8 +24,6 @@ const init = function () {
 
 const setYear = () => {
   const date =  new Date().getFullYear();
-
-  // console.log(date);
 }
 
 const pageEnterAnimation = () => {

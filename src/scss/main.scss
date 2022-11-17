@@ -238,38 +238,39 @@ a:visited {
 
 /* <!-- -------------------------------IMG------------------------------------- --> */
 
-.img {
+.img-slider-section {
   position: relative;
   margin-bottom: 120px;
-  overflow: hidden;
-  max-width: 100%;
+  // overflow: hidden;
+  // max-width: 100%;
   // width: 1040px;
-  height: 1200px;
-  @include respond-width($w-xl){
-    height: 1100px;
-  }
-  @include respond-width($w-l){
-    height: 1000px;
-  }
-  @include respond-width($w-m){
-    height: 780px;
-  }
-  @include respond-width($w-s){
-    height: 500px;
-  }
-  @include respond-width($w-xs){
-    height: 325px;
-  }
+  // height: 1200px;
+  // @include respond-width($w-xl){
+  //   height: 1100px;
+  // }
+  // @include respond-width($w-l){
+  //   height: 1000px;
+  // }
+  // @include respond-width($w-m){
+  //   height: 780px;
+  // }
+  // @include respond-width($w-s){
+  //   height: 500px;
+  // }
+  // @include respond-width($w-xs){
+  //   height: 325px;
+  // }
 
   .portfolio-img{
-    width: 100%;
-    height: 100%;
-    display: inline-block;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    will-change: z-index;
-    transition: linear all 0.1s;
+    // opacity: 0;
+    // width: 100%;
+    // height: 100%;
+    // position: absolute;
+    // top: 0px;
+    // left: 0px;
+    // display: inline-block;
+    // will-change: z-index;
+    // transition: linear all 0.1s;
   }
 }
 
