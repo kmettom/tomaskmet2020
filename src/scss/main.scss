@@ -241,29 +241,32 @@ a:visited {
 .img-slider-section {
   position: relative;
   margin-bottom: 120px;
+  width: 100%;
   // overflow: hidden;
   // max-width: 100%;
   // width: 1040px;
-  // height: 1200px;
-  // @include respond-width($w-xl){
-  //   height: 1100px;
-  // }
-  // @include respond-width($w-l){
-  //   height: 1000px;
-  // }
-  // @include respond-width($w-m){
-  //   height: 780px;
-  // }
-  // @include respond-width($w-s){
-  //   height: 500px;
-  // }
-  // @include respond-width($w-xs){
-  //   height: 325px;
-  // }
+
+  height: 1200px;
+  @include respond-width($w-xl){
+    height: 1100px;
+  }
+  @include respond-width($w-l){
+    height: 1000px;
+  }
+  @include respond-width($w-m){
+    height: 780px;
+  }
+  @include respond-width($w-s){
+    height: 500px;
+  }
+  @include respond-width($w-xs){
+    height: 325px;
+  }
 
   .portfolio-img{
-    // opacity: 0;
+    position: absolute;
     // width: 100%;
+    // opacity: 0;
     // height: 100%;
     // position: absolute;
     // top: 0px;

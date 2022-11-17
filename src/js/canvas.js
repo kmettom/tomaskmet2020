@@ -4,12 +4,12 @@ import gsap from 'gsap';
 import Scroll from './scroll.js';
 import imagesLoaded from 'imagesloaded';
 
-import imageGalleryFragment from './shaders/imageGalleryFragment.glsl';
-import imageGalleryVertex from './shaders/imageGalleryVertex.glsl';
-import galleryFragment from './shaders/galleryFragment.glsl';
-import galleryVertex from './shaders/galleryVertex.glsl';
-import thumbFragment from './shaders/thumbFragment.glsl';
-import thumbVertex from './shaders/thumbVertex.glsl';
+// import imageGalleryFragment from './shaders/imageGalleryFragment.glsl';
+// import imageGalleryVertex from './shaders/imageGalleryVertex.glsl';
+// import galleryFragment from './shaders/galleryFragment.glsl';
+// import galleryVertex from './shaders/galleryVertex.glsl';
+// import thumbFragment from './shaders/thumbFragment.glsl';
+// import thumbVertex from './shaders/thumbVertex.glsl';
 import scrollFragment from './shaders/scrollFragment.glsl';
 import scrollVertex from './shaders/scrollVertex.glsl';
 import fragment from './shaders/fragment.glsl';
@@ -96,20 +96,22 @@ setSize(){
   this.camera.aspect = this.width/this.height;
   this.camera.updateProjectionMatrix();
 }
-meshAniInOut(_index, _mesh, _material) {
-  const oneImgTime = 2.5; // no effect
-  const aniInTime = 1.75;
+meshAniInOut( _index, _mesh, _material ) {
+  const oneImgTime = 0.35; // no effect
+  const aniTime = 0.75;
+  const oneRound = ( aniTime * 2 + oneImgTime) ;
+  const fullRoundTime = oneRound * ( this.images.length - 1 ) ;
 
-  gsap.fromTo(_material.uniforms.aniInOut , {
-    value: 0,
-  }, {
-    delay: 0,
-    duration: aniInTime,
-    value: 1,
-    repeat: -1,
-    repeatDelay: oneImgTime,
-    yoyo: true,
-  });
+  let tl = gsap.timeline();
+
+  setTimeout(() => {
+
+    tl.fromTo(_material.uniforms.aniInOut , { value: 0 } , {value: 1 , duration: aniTime }) //start sequencing
+    .fromTo(_material.uniforms.aniInOut, { value: 1 } , { value: 0 , duration: aniTime , delay: oneImgTime ,  })
+    .fromTo(_material.uniforms.aniInOut, { value: 0 } , { value: 0 , duration: fullRoundTime })
+    tl.repeat(-1);
+
+  }, oneRound *_index * 1000 );
 
 }
 meshMouseListeners(_mesh, _material) {
