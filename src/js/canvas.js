@@ -144,18 +144,21 @@ meshMouseListeners(_mesh, _material) {
 
 addImageMesh(_index, _id , _img){
 
-  _img.style.opacity = 0;
+  // _img.style.opacity = 0;
     let fragmentShader;
     let vertexShader;
     let geometry;
     let bounds = _img.getBoundingClientRect();
     let position = { top : bounds.top , left: bounds.left};
-
     geometry = new THREE.PlaneGeometry( bounds.width , bounds.height );
     // position.top += this.currentScroll ;
 
     let texture = new THREE.Texture(_img);
     texture.needsUpdate = true;
+    
+    if(_index == 0){
+      console.log(_img, texture);
+    }
 
     let material = new THREE.ShaderMaterial({
       uniforms:{

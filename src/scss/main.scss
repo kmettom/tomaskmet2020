@@ -242,6 +242,7 @@ a:visited {
   position: relative;
   margin-bottom: 120px;
   width: 100%;
+  text-align: center;
   // overflow: hidden;
   // max-width: 100%;
   // width: 1040px;
@@ -264,16 +265,14 @@ a:visited {
   }
 
   .portfolio-img{
-    position: absolute;
     // width: 100%;
-    // opacity: 0;
-    // height: 100%;
-    // position: absolute;
-    // top: 0px;
-    // left: 0px;
-    // display: inline-block;
-    // will-change: z-index;
-    // transition: linear all 0.1s;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
   }
 }
 
