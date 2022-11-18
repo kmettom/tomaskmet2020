@@ -81,7 +81,6 @@ uniform float aniInOut;
 varying float vNoise;
 varying vec2 vUv;
 
-
 void main() {
     vec3 newposition = position;
     float PI = 3.1415925;

@@ -1,4 +1,4 @@
-var cursorDot = {
+const CursorDot = {
     delay: 6,
     _x: 0,
     _y: 0,
@@ -22,6 +22,7 @@ var cursorDot = {
     },
 
     setupEventListeners: function() {
+
         var self = this;
 
         document.querySelectorAll('.cursor-hover').forEach(function(el) {
@@ -49,10 +50,11 @@ var cursorDot = {
             self.cursorVisible = true;
             self.toggleCursorVisibility();
 
-            self.endX = e.pageX;
-            self.endY = e.pageY;
+            self.endX = e.clientX;
+            self.endY = e.clientY;
             self.$dot.style.top = self.endY + 'px';
             self.$dot.style.left = self.endX + 'px';
+
         });
 
         document.addEventListener('mouseenter', function(e) {
@@ -78,7 +80,6 @@ var cursorDot = {
         self.$outline.style.top = self._y + 'px';
         self.$outline.style.left = self._x + 'px';
 
-        requestAnimationFrame(this.animateDotOutline.bind(self));
     },
 
     toggleCursorSize: function() {
@@ -106,4 +107,4 @@ var cursorDot = {
     }
 }
 
-export {cursorDot};
+export {CursorDot};

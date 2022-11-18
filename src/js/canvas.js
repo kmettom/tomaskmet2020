@@ -3,6 +3,8 @@ import * as THREE from 'three';
 import gsap from 'gsap';
 import Scroll from './scroll.js';
 import imagesLoaded from 'imagesloaded';
+import {CursorDot} from './cursor.js';
+
 
 // import imageGalleryFragment from './shaders/imageGalleryFragment.glsl';
 // import imageGalleryVertex from './shaders/imageGalleryVertex.glsl';
@@ -27,6 +29,7 @@ class CanvasClass{
   this.resizeInProgress = false;
   this.hoverInProgress = true;
   this.container = options.dom;
+  this.cursorDotInitiated = false;
   // this.container = options.dom;
 
   this.time = 0;
@@ -37,6 +40,10 @@ class CanvasClass{
 
   this.images = [ ...document.querySelectorAll(".portfolio-img") ];
 
+}
+cursorDotInit(){
+  CursorDot.init();
+  this.cursorDotInitiated = true;
 }
 canvasInit(){
 
@@ -99,8 +106,9 @@ setSize(){
 meshAniInOut( _index, _mesh, _material ) {
   const oneImgTime = 0.35; // no effect
   const aniTime = 0.75;
+  const aniOverlap = 0;
   const oneRound = ( aniTime * 2 + oneImgTime) ;
-  const fullRoundTime = oneRound * ( this.images.length - 1 ) ;
+  const fullRoundTime = (oneRound - aniOverlap) * ( this.images.length - 1 ) ;
 
   let tl = gsap.timeline();
 
@@ -111,7 +119,7 @@ meshAniInOut( _index, _mesh, _material ) {
     .fromTo(_material.uniforms.aniInOut, { value: 0 } , { value: 0 , duration: fullRoundTime })
     tl.repeat(-1);
 
-  }, oneRound *_index * 1000 );
+  }, (oneRound - aniOverlap) * _index * 1000 );
 
 }
 meshMouseListeners(_mesh, _material) {
@@ -280,7 +288,13 @@ setImageMeshPositions(){
       }
     // }
 
-    this.composer.render()
+    this.composer.render();
+
+    if(this.cursorDotInitiated){
+      CursorDot.animateDotOutline();
+      // .requestAnimationFrame(this.animateDotOutline.bind(self));
+    }
+
     window.requestAnimationFrame(this.render.bind(this));
 
   }

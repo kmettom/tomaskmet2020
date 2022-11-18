@@ -1,6 +1,6 @@
 import styles from './scss/main.scss';
 import {getUserAgent} from './js/useragent.js';
-import {cursorDot} from './js/cursor.js';
+import {CursorDot} from './js/cursor.js';
 // import {Scroll} from './js/scroll.js';
 // let scrollInstance = new Scroll;
 
@@ -8,17 +8,17 @@ import {Canvas} from './js/canvas.js'
 
 const init = function () {
   setYear();
-  cursorDot.firstDraw();
+  CursorDot.firstDraw();
   setTimeout(()=>{
     pageEnterAnimation();
   }, 1000);
   setTimeout(()=>{ // after first animation over
     if(window.innerWidth > 550){
       Canvas.canvasInit();
+      Canvas.cursorDotInit();
     } else {
       portfolioImageRotate();
     }
-    // cursorDot.init();
   }, 1200);
 };
 
