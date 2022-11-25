@@ -26,7 +26,6 @@ class CanvasClass{
   constructor(options){
 
   this.scrollInProgress = false;
-  this.resizeInProgress = false;
   this.hoverInProgress = true;
   this.container = options.dom;
   this.cursorDotInitiated = false;
@@ -46,6 +45,16 @@ cursorDotInit(){
   this.cursorDotInitiated = true;
 }
 canvasInit(){
+
+  // const $images = document.querySelectorAll(".portfolio-img");
+  //
+  // for (var i = 0; i < $images.length; i++) {
+  //   let imageBox = $images[i].getBoundingClientRect()
+  //   if(imageBox.width > 0){
+  //     this.addImageMesh( i, "imageId_" + i , $images[i] );
+  //   }
+  //   // $images[i].addEventListener()
+  // }
 
   // Preload images
   const preloadImages = new Promise((resolve, reject) => {
@@ -74,7 +83,7 @@ canvasInit(){
   });
   this.renderer.setPixelRatio(Math.min(window.devicePixelRatio , 1.5));
 
-  // this.listenersInit();
+  this.listenersInit();
   // SHADOW
   this.renderer.shadowMap.enabled = true;
   this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -96,12 +105,33 @@ canvasInit(){
 
   this.render();
 }
+listenersInit(){
+  window.addEventListener('resize', () => {
+    this.setSize();
+
+    this.imageStore = [];
+    this.materials = [];
+
+    for (var i = 0; i < this.images.length; i++) {
+      const _id = "imageId_" + i;
+      const selectedObject = this.scene.getObjectByName(_id);
+      this.scene.remove( selectedObject );
+
+      this.addImageMesh( i, _id , this.images[i] );
+    }
+
+  });
+
+}
 setSize(){
   this.width = this.container.offsetWidth;
   this.height = this.container.offsetHeight;
   this.renderer.setSize( this.width,this.height );
   this.camera.aspect = this.width/this.height;
   this.camera.updateProjectionMatrix();
+
+  console.log("set size - "  ,   this.width);
+
 }
 meshAniInOut( _index, _mesh, _material ) {
   const oneImgTime = 0.35; // no effect
@@ -141,85 +171,86 @@ meshMouseListeners(_mesh, _material) {
   })
 
 }
-
+getImageSize (_img){
+  let bounds = _img.getBoundingClientRect();
+  console.log("LEFT" , bounds.left );
+  const newWidth = this.width - (bounds.left * 2);
+  const sizeCoef =  newWidth / bounds.width;
+  const newHeight = bounds.height * sizeCoef;
+  return {width:newWidth , height: newHeight}
+}
 addImageMesh(_index, _id , _img){
+  _img.style.opacity = 0;
+  let fragmentShader;
+  let vertexShader;
+  let geometry;
+  let bounds = _img.getBoundingClientRect();
+  const imgSize = this.getImageSize(_img);
+  let position = {top: bounds.top + this.currentScroll , left: bounds.left };
 
-  // _img.style.opacity = 0;
-    let fragmentShader;
-    let vertexShader;
-    let geometry;
-    let bounds = _img.getBoundingClientRect();
-    let position = { top : bounds.top , left: bounds.left};
-    geometry = new THREE.PlaneGeometry( bounds.width , bounds.height );
-    // position.top += this.currentScroll ;
+  console.log(imgSize.width);
 
-    let texture = new THREE.Texture(_img);
-    texture.needsUpdate = true;
-    
-    if(_index == 0){
-      console.log(_img, texture);
-    }
+  geometry = new THREE.PlaneGeometry( imgSize.width , imgSize.height );
 
-    let material = new THREE.ShaderMaterial({
-      uniforms:{
-        time: {value:0},
-        uImage: {value: texture},
-        vectorVNoise: {value: new THREE.Vector2( 1.5 , 1.5 )}, // 1.5
-        vectorWave: {value: new THREE.Vector2( 0.5 , 0.5 )}, // 0.5
-        hoverState: {value: 0},
-        hover: {value: new THREE.Vector2(0.5,0.5)},
-        aniInOut: {value: 0},
-      },
-      side: THREE.DoubleSide,
-      fragmentShader: fragment,
-      vertexShader: vertex,
-      name: _id,
-      transparent: true,
-      // opacity: 0.1,
-      // side: THREE.DoubleSide,
-      // wireframe: true
-    });
+  let texture = new THREE.Texture(_img);
+  texture.needsUpdate = true;
 
-    this.materials.push(material);
+  let material = new THREE.ShaderMaterial({
+    uniforms:{
+      time: {value:0},
+      uImage: {value: texture},
+      vectorVNoise: {value: new THREE.Vector2( 1.5 , 1.5 )}, // 1.5
+      vectorWave: {value: new THREE.Vector2( 0.5 , 0.5 )}, // 0.5
+      hoverState: {value: 0},
+      hover: {value: new THREE.Vector2(0.5,0.5)},
+      aniInOut: {value: 0},
+    },
+    side: THREE.DoubleSide,
+    fragmentShader: fragment,
+    vertexShader: vertex,
+    name: _id,
+    transparent: true,
+    // wireframe: true
+  });
 
-    let mesh = new THREE.Mesh( geometry, material );
-    mesh.name =  _id;
+  this.materials.push(material);
 
-    mesh.castShadow = true;
-    mesh.receiveShadow = true;
-    this.scene.add(mesh);
+  let mesh = new THREE.Mesh( geometry, material );
+  mesh.name =  _id;
 
-    const newMesh = {
-      name:_id,
-      img: _img,
-      mesh: mesh,
-      top: position.top,
-      left: position.left,
-      width: bounds.width,
-      height: bounds.height,
-    }
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  this.scene.add(mesh);
 
-    this.imageStore.push(newMesh);
-    this.meshMouseListeners(newMesh, material);
-    this.meshAniInOut(_index, newMesh, material);
-    this.scroll.setSize();
-
-    let meshIndex = this.imageStore.length -1;
-
-    this.setImageMeshPositions();
-
+  const newMesh = {
+    name:_id,
+    img: _img,
+    mesh: mesh,
+    top: position.top,
+    left: position.left,
+    width: imgSize.width,
+    height: imgSize.height,
   }
+
+  this.imageStore.push(newMesh);
+  this.meshMouseListeners(newMesh, material);
+  this.meshAniInOut(_index, newMesh, material);
+
+  let meshIndex = this.imageStore.length -1;
+
+  this.setImageMeshPositions();
+
+}
   resetImageMeshPosition(){
   for (var i = 0; i < this.imageStore.length; i++) {
-    const newBounds = this.imageStore[i].img.getBoundingClientRect()
+    const newBounds = this.imageStore[i].img.getBoundingClientRect();
+    const newSize = this.getImageSize(this.imageStore[i].img);
+
     this.imageStore[i].left = newBounds.left;
     this.imageStore[i].top = newBounds.top;
-    this.imageStore[i].width = newBounds.width;
-    this.imageStore[i].height = newBounds.height;
+    this.imageStore[i].width = newSize.width;
+    this.imageStore[i].height = newSize.height;
 
-    if(newBounds.width != this.imageStore[i].mesh.geometry.parameters.width){
-      console.log("resize image");
-    }
 
     this.imageStore[i].mesh.position.x = this.imageStore[i].left - this.width/2 + this.imageStore[i].width/2;
     this.imageStore[i].mesh.position.y =  - this.imageStore[i].top + this.height/2 - this.imageStore[i].height/2;
@@ -273,10 +304,6 @@ setImageMeshPositions(){
     this.scrollInProgress = this.currentScroll != this.scroll.scrollToRender ;
     this.currentScroll = this.scroll.scrollToRender;
 
-    // update image mesh positions on resize
-    if(this.resizeInProgress){
-      this.resetImageMeshPosition();
-    }
     //animate on scroll
     if(
       this.scrollInProgress
