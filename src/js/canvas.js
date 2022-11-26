@@ -5,18 +5,10 @@ import Scroll from './scroll.js';
 import imagesLoaded from 'imagesloaded';
 import {CursorDot} from './cursor.js';
 
-
-// import imageGalleryFragment from './shaders/imageGalleryFragment.glsl';
-// import imageGalleryVertex from './shaders/imageGalleryVertex.glsl';
-// import galleryFragment from './shaders/galleryFragment.glsl';
-// import galleryVertex from './shaders/galleryVertex.glsl';
-// import thumbFragment from './shaders/thumbFragment.glsl';
-// import thumbVertex from './shaders/thumbVertex.glsl';
 import scrollFragment from './shaders/scrollFragment.glsl';
 import scrollVertex from './shaders/scrollVertex.glsl';
 import fragment from './shaders/fragment.glsl';
 import vertex from './shaders/vertex.glsl';
-
 
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
@@ -134,8 +126,8 @@ setSize(){
 
 }
 meshAniInOut( _index, _mesh, _material ) {
-  const oneImgTime = 0.35; // no effect
-  const aniTime = 0.75;
+  const oneImgTime = 0.5; // no effect
+  const aniTime = 1.5;
   const aniOverlap = 0;
   const oneRound = ( aniTime * 2 + oneImgTime) ;
   const fullRoundTime = (oneRound - aniOverlap) * ( this.images.length - 1 ) ;
@@ -311,18 +303,15 @@ setImageMeshPositions(){
       this.customPass.uniforms.scrollSpeed.value = this.scroll.speedTarget;
       this.setImageMeshPositions();
     }
-    //animate on hover
-    // if(this.hoverInProgress){
-      for (var i = 0; i < this.materials.length; i++) {
-        this.materials[i].uniforms.time.value = this.time;
-      }
-    // }
+    //animate time
+    for (var i = 0; i < this.materials.length; i++) {
+      this.materials[i].uniforms.time.value = this.time;
+    }
 
     this.composer.render();
 
     if(this.cursorDotInitiated){
       CursorDot.animateDotOutline();
-      // .requestAnimationFrame(this.animateDotOutline.bind(self));
     }
 
     window.requestAnimationFrame(this.render.bind(this));

@@ -15,17 +15,15 @@ void main()	{
     float x = aniInOut;
     x = smoothstep(.0,1.0,(x*2.0+p.y-1.0));
     vec4 f = mix(
-        texture2D(uImage, (p-.5)*(1.-x)+.5),
-        texture2D(uImage, (p-.5)*x+.5), x) * vec4( 1. , 1. , 1. , (1. * aniInOut) );
+        texture2D(uImage, ( p - .9 ) * ( 1. - (x) ) + .9),
+        texture2D(uImage, ( p - .9 ) * (x) + .9),
+        // texture2D(uImage, ( p - .5 ) * ( 1. - x ) + .5),
+        // texture2D(uImage, ( p - .5 ) * x + .5),
+        x
+        )
+        * vec4( 1. , 1. , 1. , (1. * aniInOut) );
 
 
-    vec4 oceanView = texture2D(uImage,newUV);
-
-
-    // gl_FragColor = vec4(finalColor,1.);
-    // gl_FragColor = vec4(vUv,0.,1.);
-    // gl_FragColor = oceanView + 0.5*vec4(vNoise);
-    // gl_FragColor = vec4(vNoise,0.,0.,1.);
     gl_FragColor = f;
     gl_FragColor.rgb += 0.01*vec3(vNoise);
 
