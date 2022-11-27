@@ -5,7 +5,7 @@ uniform float hoverState;
 uniform float cursorPositionX;
 uniform float cursorPositionY;
 varying float vNoise;
-uniform float aniIn;
+uniform float aniInOut;
 varying vec2 vUv;
 
 
@@ -14,11 +14,11 @@ void main() {
   vNoise = hoverState*sin(dist*10. - time);
   vec3 newposition = position;
 
-  newposition.y += hoverState * 5.;
-  newposition.z += (1. - aniIn )*20.*sin(dist*10. + time);
+  // newposition.y += aniInOut * 5.;
+  newposition.z += (1. - aniInOut )*20.*sin(dist*10. + time);
 
   //**************************************
   vUv = uv;
-  gl_Position = projectionMatrix * modelViewMatrix * vec4( newposition, (1. + ( 0. * (1. - aniIn)) - hoverState / 50. ) );
+  gl_Position = projectionMatrix * modelViewMatrix * vec4( newposition, (1. + ( 0. * (1. - aniInOut)) ) );
 
 }

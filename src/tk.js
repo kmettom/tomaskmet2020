@@ -13,12 +13,12 @@ const init = function () {
     pageEnterAnimation();
   }, 1000);
   setTimeout(()=>{ // after first animation over
-    if(window.innerWidth > 550){
+    // if(window.innerWidth > 550){
       Canvas.canvasInit();
       Canvas.cursorDotInit();
-    } else {
-      portfolioImageRotate();
-    }
+    // } else {
+      // portfolioImageRotate();
+    // }
   }, 1200);
 };
 

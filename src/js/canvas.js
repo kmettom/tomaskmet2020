@@ -9,6 +9,8 @@ import scrollFragment from './shaders/scrollFragment.glsl';
 import scrollVertex from './shaders/scrollVertex.glsl';
 import fragment from './shaders/fragment.glsl';
 import vertex from './shaders/vertex.glsl';
+// import fragment from './shaders/fragment_pixelation.glsl';
+// import vertex from './shaders/vertex_pixelation.glsl';
 
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
@@ -121,27 +123,24 @@ setSize(){
   this.renderer.setSize( this.width,this.height );
   this.camera.aspect = this.width/this.height;
   this.camera.updateProjectionMatrix();
-
-  console.log("set size - "  ,   this.width);
-
 }
 meshAniInOut( _index, _mesh, _material ) {
-  const oneImgTime = 0.5; // no effect
-  const aniTime = 1.5;
-  const aniOverlap = 0;
-  const oneRound = ( aniTime * 2 + oneImgTime) ;
-  const fullRoundTime = (oneRound - aniOverlap) * ( this.images.length - 1 ) ;
+  const oneImgTime = 0.4; // no effect
+  const aniTime = 1;
+  const aniOverlap = aniTime; //aniTime
+  const oneRound = ( ( aniTime * 2 ) + oneImgTime - aniOverlap );
+  const fullRoundTime = ( oneRound ) * ( this.images.length - 1 );
 
   let tl = gsap.timeline();
 
   setTimeout(() => {
 
-    tl.fromTo(_material.uniforms.aniInOut , { value: 0 } , {value: 1 , duration: aniTime }) //start sequencing
-    .fromTo(_material.uniforms.aniInOut, { value: 1 } , { value: 0 , duration: aniTime , delay: oneImgTime ,  })
-    .fromTo(_material.uniforms.aniInOut, { value: 0 } , { value: 0 , duration: fullRoundTime })
+    tl.fromTo(_material.uniforms.aniIn , { value: 0 } , {value: 1 , duration: aniTime }) //start sequencing
+    .fromTo(_material.uniforms.aniIn, { value: 1 } , { value: 0 , duration: aniTime , delay: oneImgTime ,  })
+    .fromTo(_material.uniforms.aniIn, { value: 0 } , { value: 0 , duration: fullRoundTime - oneRound })
     tl.repeat(-1);
 
-  }, (oneRound - aniOverlap) * _index * 1000 );
+  }, oneRound * _index * 1000 );
 
 }
 meshMouseListeners(_mesh, _material) {
@@ -165,7 +164,6 @@ meshMouseListeners(_mesh, _material) {
 }
 getImageSize (_img){
   let bounds = _img.getBoundingClientRect();
-  console.log("LEFT" , bounds.left );
   const newWidth = this.width - (bounds.left * 2);
   const sizeCoef =  newWidth / bounds.width;
   const newHeight = bounds.height * sizeCoef;
@@ -180,8 +178,6 @@ addImageMesh(_index, _id , _img){
   const imgSize = this.getImageSize(_img);
   let position = {top: bounds.top + this.currentScroll , left: bounds.left };
 
-  console.log(imgSize.width);
-
   geometry = new THREE.PlaneGeometry( imgSize.width , imgSize.height );
 
   let texture = new THREE.Texture(_img);
@@ -195,7 +191,8 @@ addImageMesh(_index, _id , _img){
       vectorWave: {value: new THREE.Vector2( 0.5 , 0.5 )}, // 0.5
       hoverState: {value: 0},
       hover: {value: new THREE.Vector2(0.5,0.5)},
-      aniInOut: {value: 0},
+      aniIn: {value: 0},
+      aniOut: {value: 0},
     },
     side: THREE.DoubleSide,
     fragmentShader: fragment,
@@ -242,7 +239,6 @@ addImageMesh(_index, _id , _img){
     this.imageStore[i].top = newBounds.top;
     this.imageStore[i].width = newSize.width;
     this.imageStore[i].height = newSize.height;
-
 
     this.imageStore[i].mesh.position.x = this.imageStore[i].left - this.width/2 + this.imageStore[i].width/2;
     this.imageStore[i].mesh.position.y =  - this.imageStore[i].top + this.height/2 - this.imageStore[i].height/2;
