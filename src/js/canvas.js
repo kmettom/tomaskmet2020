@@ -131,16 +131,12 @@ meshAniInOut( _index, _mesh, _material ) {
   const oneRound = ( ( aniTime * 2 ) + oneImgTime - aniOverlap );
   const fullRoundTime = ( oneRound ) * ( this.images.length - 1 );
 
-  let tl = gsap.timeline();
-
-  setTimeout(() => {
+  let tl = gsap.timeline().delay(oneRound * _index);
 
     tl.fromTo(_material.uniforms.aniIn , { value: 0 } , {value: 1 , duration: aniTime }) //start sequencing
     .fromTo(_material.uniforms.aniIn, { value: 1 } , { value: 0 , duration: aniTime , delay: oneImgTime ,  })
     .fromTo(_material.uniforms.aniIn, { value: 0 } , { value: 0 , duration: fullRoundTime - oneRound })
     tl.repeat(-1);
-
-  }, oneRound * _index * 1000 );
 
 }
 meshMouseListeners(_mesh, _material) {
