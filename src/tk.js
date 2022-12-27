@@ -1,6 +1,13 @@
 import styles from './scss/main.scss';
 import {getUserAgent} from './js/useragent.js';
 import {CursorDot} from './js/cursor.js';
+// import gsap from 'gsap';
+import { gsap } from "gsap"
+
+import { SplitText } from "gsap/SplitText"
+
+gsap.registerPlugin(SplitText);
+
 // import {Scroll} from './js/scroll.js';
 // let scrollInstance = new Scroll;
 
@@ -8,6 +15,7 @@ import {Canvas} from './js/canvas.js'
 
 const init = function () {
   setYear();
+  projectHoversInit();
   CursorDot.firstDraw();
   setTimeout(()=>{
     pageEnterAnimation();
@@ -21,6 +29,38 @@ const init = function () {
     // }
   }, 1200);
 };
+
+const projectHoversInit = () => {
+
+  const $projectTitles = document.getElementsByClassName("project-title");
+
+  for (var i = 0; i < $projectTitles.length; i++) {
+
+    $projectTitles[i].addEventListener("mouseenter" , (_el) => {
+
+      const $aniText = _el.target.getElementsByClassName("project-name")[0];
+
+      let tl = gsap.timeline();
+      let mySplitText = new SplitText($aniText, { type: "words,chars" });
+      let chars = mySplitText.chars;
+
+      gsap.set($aniText, { perspective: 400 });
+
+      let duration  = 0.5;
+
+      tl.from(chars, {
+        duration: duration,
+        opacity: 0,
+        y: 10,
+        ease: "back",
+        stagger: duration / chars.length
+      });
+
+    })
+  }
+
+
+}
 
 const setYear = () => {
   const date =  new Date().getFullYear();

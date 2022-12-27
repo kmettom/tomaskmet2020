@@ -42,7 +42,6 @@ body {
   left: 0px;
   right: 0px;
   margin: 0 auto;
-  border: 1px solid purple;
   pointer-events: none;
   z-index: -1;
 }
@@ -264,6 +263,9 @@ a:visited {
   margin-bottom: 100px;
   .project-title{
     &:hover{
+      .project-name{
+        
+      }
       .project-stack{
         span{
           opacity: 1;
