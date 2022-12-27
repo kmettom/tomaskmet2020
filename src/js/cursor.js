@@ -85,12 +85,10 @@ const CursorDot = {
     toggleCursorSize: function() {
         var self = this;
         if (self.cursorEnlarged) {
-            self.$dot.style.transform = 'translate(-50%, -50%) scale(0.8)';
-            // self.$dot.style.opacity = '0.35';
-            self.$outline.style.transform = 'translate(-50%, -50%) scale(1.25)';
+            self.$dot.style.transform = 'translate(-50%, -50%) scale(2.25)';
+            self.$outline.style.transform = 'translate(-50%, -50%) scale(0.75)';
         } else {
             self.$dot.style.transform = 'translate(-50%, -50%) scale(1)';
-            // self.$dot.style.opacity = '1';
             self.$outline.style.transform = 'translate(-50%, -50%) scale(1)';
         }
     },

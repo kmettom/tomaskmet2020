@@ -40,21 +40,44 @@ const projectHoversInit = () => {
 
       const $aniText = _el.target.getElementsByClassName("project-name")[0];
 
-      let tl = gsap.timeline();
+      // let tl = gsap.timeline();
       let mySplitText = new SplitText($aniText, { type: "words,chars" });
       let chars = mySplitText.chars;
 
       gsap.set($aniText, { perspective: 400 });
 
-      let duration  = 0.5;
+      let duration  = 0.15;
 
-      tl.from(chars, {
-        duration: duration,
-        opacity: 0,
-        y: 10,
-        ease: "back",
-        stagger: duration / chars.length
-      });
+      for (var i = 0; i < chars.length; i++) {
+
+        let tl = gsap.timeline();
+
+        tl.to(  chars[i] , {
+          delay: i*0.035,
+          duration: duration,
+          opacity: 0,
+          y: 10,
+          ease: "power3.out",
+          // stagger: {
+          //   each:stagger,
+          // }
+        }).to(  chars[i] , {
+          duration: 0,
+          opacity: 0,
+          y: -10,
+        }).to(  chars[i] , {
+          duration: duration,
+          opacity: 1,
+          y: 0,
+          ease: "power3.out",
+          // stagger: {
+          //   each: stagger,
+          // },
+        });
+
+      }
+
+
 
     })
   }

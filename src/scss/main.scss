@@ -26,9 +26,6 @@ body {
   margin: 0px;
   color: $black;
   background-color: $white;
-  @include respond-width($w-s){
-    cursor: auto;
-  }
   @include respond-width($w-xs){
     height: auto;
   }
@@ -78,13 +75,6 @@ will-change: transform;
   }
   @include respond-width($w-s){
     padding: 5% 5%;
-  }
-}
-
-a{
-  cursor: none;
-  @include respond-width($w-s){
-    cursor: inherit;
   }
 }
 
@@ -264,7 +254,7 @@ a:visited {
   .project-title{
     &:hover{
       .project-name{
-        
+
       }
       .project-stack{
         span{
