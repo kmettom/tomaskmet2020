@@ -1,32 +1,20 @@
 import styles from './scss/main.scss';
-import {getUserAgent} from './js/useragent.js';
 import {CursorDot} from './js/cursor.js';
-// import gsap from 'gsap';
 import { gsap } from "gsap"
-
 import { SplitText } from "gsap/SplitText"
-
+import {Canvas} from './js/canvas.js'
 gsap.registerPlugin(SplitText);
 
-// import {Scroll} from './js/scroll.js';
-// let scrollInstance = new Scroll;
-
-import {Canvas} from './js/canvas.js'
-
 const init = function () {
-  setYear();
+  setYearAndAvailability();
   projectHoversInit();
   CursorDot.firstDraw();
   setTimeout(()=>{
     pageEnterAnimation();
   }, 1000);
   setTimeout(()=>{ // after first animation over
-    // if(window.innerWidth > 550){
       Canvas.canvasInit();
       Canvas.cursorDotInit();
-    // } else {
-      // portfolioImageRotate();
-    // }
   }, 1200);
 };
 
@@ -40,7 +28,6 @@ const projectHoversInit = () => {
 
       const $aniText = _el.target.getElementsByClassName("project-name")[0];
 
-      // let tl = gsap.timeline();
       let mySplitText = new SplitText($aniText, { type: "words,chars" });
       let chars = mySplitText.chars;
 
@@ -51,16 +38,12 @@ const projectHoversInit = () => {
       for (var i = 0; i < chars.length; i++) {
 
         let tl = gsap.timeline();
-
         tl.to(  chars[i] , {
           delay: i*0.035,
           duration: duration,
           opacity: 0,
           y: 10,
           ease: "power3.out",
-          // stagger: {
-          //   each:stagger,
-          // }
         }).to(  chars[i] , {
           duration: 0,
           opacity: 0,
@@ -70,76 +53,68 @@ const projectHoversInit = () => {
           opacity: 1,
           y: 0,
           ease: "power3.out",
-          // stagger: {
-          //   each: stagger,
-          // },
         });
 
       }
 
-
-
     })
   }
-
-
 }
 
-const setYear = () => {
-  const date =  new Date().getFullYear();
+const setYearAndAvailability = () => {
+  const date =  new Date();
+  const $setYear = document.getElementById('setYear');
+  const $setYear2 = document.getElementById('setYear2');
+  $setYear.innerHTML = date.getFullYear();
+  $setYear2.innerHTML = date.getFullYear();
+
+  const $setAvailability = document.getElementById('setAvailability');
+  const months = [ "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December" ];
+  let availableMonth = Number(date.getMonth() ) + 1;
+  if(availableMonth > 12){
+    availableMonth = 1;
+  }
+  $setAvailability.innerHTML =  months[ availableMonth ] + ' ' + date.getFullYear();
 }
 
 const pageEnterAnimation = () => {
   document.getElementById('firstAnimationOverlay').classList.add('hide');
-  // document.getElementById('menuElements').classList.add('animate-in');
-  // document.getElementById('headerText').classList.add('animate-in');
+  animateHeaderText();
 };
 
-const portfolioImageRotate = () => {
-  let imgs = document.getElementsByClassName('portfolio-img');
-  let activeImgIndex = 0;
+const animateHeaderText = () => {
+    const $headerText = document.getElementById('headerText');
+    let mySplitText = new SplitText($headerText, { type: "words,chars" });
+    let chars = mySplitText.chars;
 
-  const fps = 2.5;
-  const imageChange = () => {
-    setTimeout(function() {
-      if(activeImgIndex > imgs.length - 1) activeImgIndex = 0;
-      for (var i = 0; i < imgs.length; i++) {
-        if(i == activeImgIndex){
-          imgs[i].style.zIndex = '1';
-        }else {
-          imgs[i].style.zIndex = '0';
-        }
-      }
-      activeImgIndex++
-      requestAnimationFrame(imageChange);
-    }, 1000 / fps);
-  };
-  imageChange();
+    gsap.set($headerText, { perspective: 400 });
 
+    let duration  = 0.5;
+
+    for (let i = 0; i < chars.length; i++) {
+
+        let tl = gsap.timeline();
+
+        tl.to(  chars[i] , {
+        delay: i*0.045,
+        duration: duration,
+        opacity: 0,
+        y: 10,
+        ease: "power3.out",
+        }).to(  chars[i] , {
+        duration: 0,
+        opacity: 0,
+        y: -10,
+        }).to(  chars[i] , {
+        duration: duration,
+        opacity: 1,
+        y: 0,
+        ease: "power3.out",
+        });
+
+    }
 }
-
-
-/*************************** */
-// Cursor
-/*************************** */
-// class Cursor {
-//   constructor() {
-//     this.cursor = cursorDot({
-//       easing: 4,
-//       diameter: 50,
-//       borderWidth: 1,
-//       borderColor: "#e2e2e2",
-//       background: "transparent",
-//     });
-//   }
-//
-// };
-
-// var cursorInstance;
-// var cursorInit = function () {
-//   cursorInstance = new Cursor();
-//
-// };
 
 /*************************** */
 // DOCUMENT LOADED -> INIT
