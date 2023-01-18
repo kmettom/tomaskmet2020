@@ -79,8 +79,8 @@ const setYearAndAvailability = () => {
 }
 
 const pageEnterAnimation = () => {
-  document.getElementById('firstAnimationOverlay').classList.add('hide');
-  animateHeaderText();
+    animateHeaderText();
+    document.getElementById('firstAnimationOverlay').classList.add('hide');
 };
 
 const animateHeaderText = () => {
@@ -90,27 +90,22 @@ const animateHeaderText = () => {
 
     gsap.set($headerText, { perspective: 400 });
 
-    let duration  = 0.5;
+    let duration  = 0.75;
 
     for (let i = 0; i < chars.length; i++) {
 
         let tl = gsap.timeline();
 
-        tl.to(  chars[i] , {
-        delay: i*0.045,
-        duration: duration,
-        opacity: 0,
-        y: 10,
-        ease: "power3.out",
+        tl.to(chars[i] , {
+            duration: 0,
+            opacity: 0,
+            y: 10,
         }).to(  chars[i] , {
-        duration: 0,
-        opacity: 0,
-        y: -10,
-        }).to(  chars[i] , {
-        duration: duration,
-        opacity: 1,
-        y: 0,
-        ease: "power3.out",
+            delay: 0.5 + (i*0.035),
+            duration: duration,
+            opacity: 1,
+            y: 0,
+            ease: "power3.out",
         });
 
     }
