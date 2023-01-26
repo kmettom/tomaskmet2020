@@ -74,20 +74,22 @@ const CursorDot = {
 
     animateDotOutline: function() {
         var self = this;
-
         self._x += (self.endX - self._x) / self.delay;
         self._y += (self.endY - self._y) / self.delay;
         self.$outline.style.top = self._y + 'px';
         self.$outline.style.left = self._x + 'px';
-
     },
 
     toggleCursorSize: function() {
         var self = this;
         if (self.cursorEnlarged) {
-            self.$dot.style.transform = 'translate(-50%, -50%) scale(2.25)';
-            self.$outline.style.transform = 'translate(-50%, -50%) scale(0.75)';
+            self.$dot.style.transform = 'translate(-50%, -50%) scale(6.0)';
+            self.$outline.style.transform = 'translate(-50%, -50%) scale(0.65)';
+            self.$outline.style.border = '5px solid #eeeeee';
+            self.$outline.style.borderRadius = '0%';
         } else {
+            self.$outline.style.borderRadius = '50%';
+            self.$outline.style.border = '1px solid #333333';
             self.$dot.style.transform = 'translate(-50%, -50%) scale(1)';
             self.$outline.style.transform = 'translate(-50%, -50%) scale(1)';
         }

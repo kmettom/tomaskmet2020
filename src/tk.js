@@ -15,6 +15,7 @@ const init = function () {
   setTimeout(()=>{ // after first animation over
       Canvas.canvasInit();
       Canvas.cursorDotInit();
+      Canvas.sectionAnimations();
   }, 1200);
 };
 

@@ -1,6 +1,7 @@
 @import "_config";
 @import "_cursor";
 @import "_first-ani";
+@import "_sections-ani";
 
 html {
   width: 100%;
@@ -53,7 +54,6 @@ position: relative;
 will-change: transform;
 }
 
-
 #cursorElement{
   transition: ease all 0.1s;
   position:fixed;
@@ -77,6 +77,10 @@ will-change: transform;
     padding: 5% 5%;
   }
 }
+.menu-elements{
+  padding-bottom: 21px;
+}
+
 
 a:link {
   text-decoration: none;
@@ -99,13 +103,24 @@ a:visited {
   width: 100%;
   z-index: 99;
   pointer-events: none;
+  &:after{
+    content: "";
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    height: 1px;
+    width: 80%;
+    background-color: $black;
+    margin: 0 auto;
+  }
   @include respond-width($w-xs){
     font-size: 13px;
   }
 
   .contact-element{
     pointer-events: auto;
-    padding: 0px 0px;
+    padding: 20px 0px 20px 20px;
   }
 
   .available-wrapper{
@@ -124,6 +139,7 @@ a:visited {
 .menu-elements {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 /* <!-- -------------------------------HEADER------------------------------------- --> */
 .header {

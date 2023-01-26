@@ -29,6 +29,7 @@ class CanvasClass{
   this.imageStore = [];
 
   this.images = [ ...document.querySelectorAll(".portfolio-img") ];
+  this.sectionStore = [ ...document.querySelectorAll(".ani-section")];
 
 }
 cursorDotInit(){
@@ -36,16 +37,6 @@ cursorDotInit(){
   this.cursorDotInitiated = true;
 }
 canvasInit(){
-
-  // const $images = document.querySelectorAll(".portfolio-img");
-  //
-  // for (var i = 0; i < $images.length; i++) {
-  //   let imageBox = $images[i].getBoundingClientRect()
-  //   if(imageBox.width > 0){
-  //     this.addImageMesh( i, "imageId_" + i , $images[i] );
-  //   }
-  //   // $images[i].addEventListener()
-  // }
 
   // Preload images
   const preloadImages = new Promise((resolve, reject) => {
@@ -284,6 +275,7 @@ setImageMeshPositions(){
     this.scroll.render();
     this.scrollInProgress = this.currentScroll != this.scroll.scrollToRender ;
     this.currentScroll = this.scroll.scrollToRender;
+    this.sectionAnimations(this.currentScroll);
 
     //animate on scroll
     if(
@@ -304,6 +296,31 @@ setImageMeshPositions(){
     }
 
     window.requestAnimationFrame(this.render.bind(this));
+
+  }
+
+
+// *******************************
+//   Section on scroll animations
+// *******************************
+
+  sectionAnimations(_scroll){
+
+    for (var i = 0; i < this.sectionStore.length; i++) {
+      const sectionBounds = this.sectionStore[i].getBoundingClientRect();
+      const screenHeight = this.height * 0.8;
+
+      if(i == 0){
+        console.log(sectionBounds.top , this.currentScroll , screenHeight );
+      }
+
+      if(sectionBounds.top < screenHeight ){
+        this.sectionStore[i].classList.add('section-active');
+      }
+      else{
+        this.sectionStore[i].classList.remove('section-active');
+      }
+    }
 
   }
 
