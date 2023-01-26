@@ -4,17 +4,14 @@ import gsap from 'gsap';
 import Scroll from './scroll.js';
 import imagesLoaded from 'imagesloaded';
 import {CursorDot} from './cursor.js';
-
 import scrollFragment from './shaders/scrollFragment.glsl';
 import scrollVertex from './shaders/scrollVertex.glsl';
 import fragment from './shaders/fragment.glsl';
 import vertex from './shaders/vertex.glsl';
-// import fragment from './shaders/fragment_pixelation.glsl';
-// import vertex from './shaders/vertex_pixelation.glsl';
-
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
+
 
 class CanvasClass{
   constructor(options){
