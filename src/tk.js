@@ -21,7 +21,7 @@ const init = function () {
 
 const projectHoversInit = () => {
 
-  const $projectTitles = document.getElementsByClassName("project-title");
+  const $projectTitles = document.getElementsByClassName("project-link");
 
   for (var i = 0; i < $projectTitles.length; i++) {
 

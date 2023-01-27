@@ -25,6 +25,14 @@
     font-family: "WorkSans";
     src: url(./font/WorkSans-Light.ttf);
   }
+  @font-face {
+    font-family: "NeueHaasDisplay";
+    src: url(./font/NeueHaasDisplayBold.ttf);
+  }
+  @font-face {
+    font-family: "MonumentGrotestBold";
+    src: url(./font/MonumentGrotesk-Bold.ttf);
+  }
   body{
     background-color: #333333;
     color: #333333;
@@ -33,7 +41,8 @@
     opacity: 0;
   }
   .header-text{
-    font-family: "OldStandardTT" , serif;
+    font-family: "NeueHaasDisplay" , serif;
+    /*font-family: "OldStandardTT" , serif;*/
   }
   .top-menu{
     font-family: "WorkSans" , sans-serif;
@@ -92,10 +101,10 @@
             I’m Tomáš,</br>
           </span>
           <span>
-            Web</br>
+            Web Developer</br>
           </span>
           <span>
-            Developer
+
           </span>
         </p>
       </section>
@@ -119,7 +128,7 @@
       <section class="skills ani-section">
         <p class="skills-header">SKILLS</p>
         <p class="skills-text">
-<!--          NuxtJS</br>-->
+          NuxtJS</br>
           VueJS</br>
           Typescript</br>
           Angular13+</br>
@@ -157,25 +166,25 @@
       <section class="img-slider-section ani-section">
 
         <div class="img-wrapper">
-          <img class="portfolio-img img-wrapper" src="img/screen_1.jpg" alt="">
+          <img class="portfolio-img img-wrapper" src="img/screen_1.jpg" alt="web development project">
         </div>
         <div class="img-wrapper">
-          <img class="portfolio-img img-wrapper" src="img/screen_2.jpg" alt="">
+          <img class="portfolio-img img-wrapper" src="img/screen_2.jpg" alt="web development project">
         </div>
         <div class="img-wrapper">
-          <img class="portfolio-img img-wrapper" src="img/screen_3.jpg" alt="">
+          <img class="portfolio-img img-wrapper" src="img/screen_3.jpg" alt="web development project">
         </div>
         <div class="img-wrapper">
-          <img class="portfolio-img img-wrapper" src="img/screen_4.jpg" alt="">
+          <img class="portfolio-img img-wrapper" src="img/screen_4.jpg" alt="web development project">
         </div>
         <div class="img-wrapper">
-          <img class="portfolio-img img-wrapper" src="img/screen_5.jpg" alt="">
+          <img class="portfolio-img img-wrapper" src="img/screen_5.jpg" alt="web development project">
         </div>
         <div class="img-wrapper">
-          <img class="portfolio-img img-wrapper" src="img/screen_6.jpg" alt="">
+          <img class="portfolio-img img-wrapper" src="img/screen_6.jpg" alt="web development project">
         </div>
         <div class="img-wrapper">
-          <img class="portfolio-img img-wrapper" src="img/screen_7.jpg" alt="">
+          <img class="portfolio-img img-wrapper" src="img/screen_7.jpg" alt="web development project">
         </div>
 
       </section>
@@ -183,71 +192,65 @@
       <section class="projects ani-section">
 
         <div class="project">
-          <p class="project-position">
-            CORE TEAM DEV
-          </p>
-          <p class="project-title">
-            <a class="cursor-hover" href="https://app.brightunion.io/" target="_blank">
+          <a class="project-link cursor-hover" href="https://app.brightunion.io/" target="_blank">
+            <p class="project-position">
+              CORE TEAM DEV
+            </p>
+            <p class="project-title">
               <span class="project-name">
               Bright Union
               </span>
-            </a>
-            <span class="project-stack">
+              <span class="project-stack">
               <span>VueJS</span>
               <span>Typescript</span>
               <span>Web3JS</span>
               <span>Webpack</span>
             </span>
-          </p>
+            </p>
+          </a>
         </div>
 
         <div class="project">
+          <a class="project-link cursor-hover" href="https://eotm.info" target="_blank">
             <p class="project-position">
               FREELANCE full stack
             </p>
             <p class="project-title">
-              <a class="cursor-hover" href="https://eotm.info" target="_blank">
               <span class="project-name">
                 EOTM
-                <!-- <span class="comming">
-                  <span>comming</span>
-                  <span>soon</span>
-                </span> -->
               </span>
               <span class="project-stack">
-                <!-- <span>comming</span>
-                <span>soon</span> -->
                 <span>VueJS</span>
                 <span>ThreeJS</span>
                 <span>ExpressJS</span>
                 <span>MongoDB</span>
                 <span>Webpack</span>
               </span>
-            </a>
             </p>
+          </a>
         </div>
 
         <div class="project">
-          <p class="project-position">
+          <a class="project-link cursor-hover" href="https://neosephiri.com/" target="_blank">
+            <p class="project-position">
               FREELANCE DEV
-          </p>
-          <p class="project-title">
-            <a class="cursor-hover" href="https://neosephiri.com/" target="_blank">
+            </p>
+            <p class="project-title">
               <span class="project-name">
                 Neo Sephiri
               </span>
-            </a>
-            <span class="project-stack">
+              <span class="project-stack">
               <span>Shopify</span>
               <span>ES6+</span>
               <span>Webpack</span>
               <span>GSAP</span>
             </span>
-          </p>
+            </p>
+          </a>
         </div>
 
         <div class="project">
-          <a class="cursor-hover" href="https://jagodakondratiuk.com/" target="_blank">
+          <a class="project-link cursor-hover" href="https://jagodakondratiuk.com/" target="_blank">
             <p class="project-position">
               FREELANCE DEV
             </p>
@@ -265,48 +268,24 @@
         </div>
 
         <div class="project">
-          <p class="project-position">
+          <a class="project-link cursor-hover" href="https://yabbu.com" target="_blank">
+            <p class="project-position">
               LEAD FRONT-END DEV
-          </p>
-          <p class="project-title">
-            <a class="cursor-hover" href="https://yabbu.com" target="_blank">
+            </p>
+            <p class="project-title">
               <span class="project-name">
                 Yabbu
               </span>
-            </a>
-            <span class="project-stack">
+              <span class="project-stack">
               <span>VueJS</span>
               <span>AngularJS</span>
               <span>ES6+</span>
               <span>Webpack</span>
               <span>Grunt</span>
             </span>
-          </p>
-        </div>
-
-
-        <!-- <div class="project">
-          <a class="cursor-hover" href="https://jagodakondratiuk.com/" target="_blank">
-            <p class="project-position">
-              SMART CONTRACT
-            </p>
-            <p class="project-title">
-              <span class="project-name">
-                Linked
-                <span class="comming">
-                  <span>comming</span>
-                  <span>soon</span>
-                </span>
-              </span>
-              <span class="project-stack">
-                <span>Truffle</span>
-                <span>Web3JS</span>
-                <span>Smart Contract</span>
-                <span>Solidity</span>
-              </span>
             </p>
           </a>
-        </div> -->
+        </div>
 
       </section>
 

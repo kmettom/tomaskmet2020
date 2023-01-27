@@ -85,10 +85,14 @@ const CursorDot = {
         if (self.cursorEnlarged) {
             self.$dot.style.transform = 'translate(-50%, -50%) scale(6.0)';
             self.$outline.style.transform = 'translate(-50%, -50%) scale(0.65)';
-            self.$outline.style.border = '5px solid #eeeeee';
+            self.$outline.style.border = '0px solid #eeeeee';
+            self.$outline.style.borderTop = '5px solid #eeeeee';
+            self.$outline.style.borderRight = '5px solid #eeeeee';
             self.$outline.style.borderRadius = '0%';
         } else {
             self.$outline.style.borderRadius = '50%';
+            self.$outline.style.borderTop = '1px solid #333333';
+            self.$outline.style.borderRight = '1px solid #333333';
             self.$outline.style.border = '1px solid #333333';
             self.$dot.style.transform = 'translate(-50%, -50%) scale(1)';
             self.$outline.style.transform = 'translate(-50%, -50%) scale(1)';
