@@ -16,8 +16,6 @@ void main()	{
     vec4 f = mix(
         texture2D(uImage, ( p - .5 ) * (1. - aniIn) + .5),
         texture2D(uImage, ( p - .5 ) * x + .5),
-        // texture2D(uImage, ( p - .5 ) * ( 1. - x ) + .5),
-        // texture2D(uImage, ( p - .5 ) * x + .5),
         x
         )
         * vec4( 1. , 1. , 1. ,  x );

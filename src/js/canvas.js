@@ -6,7 +6,9 @@ import imagesLoaded from 'imagesloaded';
 import {CursorDot} from './cursor.js';
 import scrollFragment from './shaders/scrollFragment.glsl';
 import scrollVertex from './shaders/scrollVertex.glsl';
+import fragmentT from './shaders/fragmentT.glsl';
 import fragment from './shaders/fragment.glsl';
+import vertexT from './shaders/vertexT.glsl';
 import vertex from './shaders/vertex.glsl';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
@@ -128,6 +130,25 @@ meshAniInOut( _index, _mesh, _material ) {
     tl.repeat(-1);
 
 }
+meshAniInOutPlayground( _index, _mesh, _material ) {
+  if(_index != 0) return;
+
+  console.log(_index);
+
+  const oneImgTime = 0.4; // no effect
+  const aniTime = 1;
+  const aniOverlap = aniTime; //aniTime
+  const oneRound = ( ( aniTime * 2 ) + oneImgTime - aniOverlap );
+  const fullRoundTime = ( oneRound ) * ( this.images.length - 1 );
+
+  let tl = gsap.timeline().delay(oneRound * _index);
+
+    tl.fromTo(_material.uniforms.aniIn , { value: 0 } , {value: 1 , duration: aniTime }) //start sequencing
+    .fromTo(_material.uniforms.aniIn, { value: 1 } , { value: 0 , duration: aniTime , delay: oneImgTime ,  })
+    .fromTo(_material.uniforms.aniIn, { value: 0 } , { value: 0 , duration: oneImgTime })
+    tl.repeat(-1);
+
+}
 meshMouseListeners(_mesh, _material) {
 
   _mesh.img.addEventListener('mouseenter',(event)=>{
@@ -178,9 +199,12 @@ addImageMesh(_index, _id , _img){
       hover: {value: new THREE.Vector2(0.5,0.5)},
       aniIn: {value: 0},
       aniOut: {value: 0},
+      scale: {value:4},
+      smootheness:{value: 0.01},
+      seed: {value: 12.988},
     },
     side: THREE.DoubleSide,
-    fragmentShader: fragment,
+    fragmentShader: fragmentT,
     vertexShader: vertex,
     name: _id,
     transparent: true,
@@ -208,7 +232,9 @@ addImageMesh(_index, _id , _img){
 
   this.imageStore.push(newMesh);
   this.meshMouseListeners(newMesh, material);
-  this.meshAniInOut(_index, newMesh, material);
+  // this.meshAniInOut(_index, newMesh, material);
+
+  this.meshAniInOutPlayground(_index, newMesh, material)
 
   let meshIndex = this.imageStore.length -1;
 
@@ -311,9 +337,9 @@ setImageMeshPositions(){
       const sectionBounds = this.sectionStore[i].getBoundingClientRect();
       const screenHeight = this.height * 0.8;
 
-      if(i == 0){
-        console.log(sectionBounds.top , this.currentScroll , screenHeight );
-      }
+      // if(i == 0){
+      //   console.log(sectionBounds.top , this.currentScroll , screenHeight );
+      // }
 
       if(sectionBounds.top < screenHeight ){
         this.sectionStore[i].classList.add('section-active');
