@@ -6,15 +6,12 @@ import imagesLoaded from 'imagesloaded';
 import {CursorDot} from './cursor.js';
 import scrollFragment from './shaders/scrollFragment.glsl';
 import scrollVertex from './shaders/scrollVertex.glsl';
-import fragmentT from './shaders/fragmentT.glsl';
 import fragment from './shaders/fragment.glsl';
-import vertexT from './shaders/vertexT.glsl';
 import vertex from './shaders/vertex.glsl';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 
-// https://gl-transitions.com/editor/perlin
 
 class CanvasClass{
   constructor(options){
@@ -189,6 +186,8 @@ addImageMesh(_index, _id , _img){
   let texture = new THREE.Texture(_img);
   texture.needsUpdate = true;
 
+  const randomScale = Math.random() * (10) + 5; // random between 5 - 15
+
   let material = new THREE.ShaderMaterial({
     uniforms:{
       time: {value:0},
@@ -199,12 +198,12 @@ addImageMesh(_index, _id , _img){
       hover: {value: new THREE.Vector2(0.5,0.5)},
       aniIn: {value: 0},
       aniOut: {value: 0},
-      scale: {value:4},
+      scale: {value:randomScale},
       smootheness:{value: 0.01},
       seed: {value: 12.988},
     },
     side: THREE.DoubleSide,
-    fragmentShader: fragmentT,
+    fragmentShader: fragment,
     vertexShader: vertex,
     name: _id,
     transparent: true,
@@ -232,11 +231,9 @@ addImageMesh(_index, _id , _img){
 
   this.imageStore.push(newMesh);
   this.meshMouseListeners(newMesh, material);
-  // this.meshAniInOut(_index, newMesh, material);
+  this.meshAniInOut(_index, newMesh, material);
 
-  this.meshAniInOutPlayground(_index, newMesh, material)
-
-  let meshIndex = this.imageStore.length -1;
+  // this.meshAniInOutPlayground(_index, newMesh, material)
 
   this.setImageMeshPositions();
 
