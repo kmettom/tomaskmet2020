@@ -113,8 +113,8 @@ setSize(){
   this.camera.updateProjectionMatrix();
 }
 meshAniInOut( _index, _mesh, _material ) {
-  const oneImgTime = 0.4; // no effect
-  const aniTime = 1;
+  const oneImgTime = 0.6; // no effect
+  const aniTime = 1.5;
   const aniOverlap = aniTime; //aniTime
   const oneRound = ( ( aniTime * 2 ) + oneImgTime - aniOverlap );
   const fullRoundTime = ( oneRound ) * ( this.images.length - 1 );
@@ -124,25 +124,6 @@ meshAniInOut( _index, _mesh, _material ) {
     tl.fromTo(_material.uniforms.aniIn , { value: 0 } , {value: 1 , duration: aniTime }) //start sequencing
     .fromTo(_material.uniforms.aniIn, { value: 1 } , { value: 0 , duration: aniTime , delay: oneImgTime ,  })
     .fromTo(_material.uniforms.aniIn, { value: 0 } , { value: 0 , duration: fullRoundTime - oneRound })
-    tl.repeat(-1);
-
-}
-meshAniInOutPlayground( _index, _mesh, _material ) {
-  if(_index != 0) return;
-
-  console.log(_index);
-
-  const oneImgTime = 0.4; // no effect
-  const aniTime = 1;
-  const aniOverlap = aniTime; //aniTime
-  const oneRound = ( ( aniTime * 2 ) + oneImgTime - aniOverlap );
-  const fullRoundTime = ( oneRound ) * ( this.images.length - 1 );
-
-  let tl = gsap.timeline().delay(oneRound * _index);
-
-    tl.fromTo(_material.uniforms.aniIn , { value: 0 } , {value: 1 , duration: aniTime }) //start sequencing
-    .fromTo(_material.uniforms.aniIn, { value: 1 } , { value: 0 , duration: aniTime , delay: oneImgTime ,  })
-    .fromTo(_material.uniforms.aniIn, { value: 0 } , { value: 0 , duration: oneImgTime })
     tl.repeat(-1);
 
 }
@@ -186,7 +167,8 @@ addImageMesh(_index, _id , _img){
   let texture = new THREE.Texture(_img);
   texture.needsUpdate = true;
 
-  const randomScale = Math.random() * (10) + 5; // random between 5 - 15
+  const randomScale = Math.random() * (10 - 5) + 5; // random between 5 - 15
+  console.log(randomScale);
 
   let material = new THREE.ShaderMaterial({
     uniforms:{
@@ -200,7 +182,7 @@ addImageMesh(_index, _id , _img){
       aniOut: {value: 0},
       scale: {value:randomScale},
       smootheness:{value: 0.01},
-      seed: {value: 12.988},
+      seed: {value: 112.988},
     },
     side: THREE.DoubleSide,
     fragmentShader: fragment,
