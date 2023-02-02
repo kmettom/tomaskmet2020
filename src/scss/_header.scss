@@ -19,8 +19,8 @@
 }
 
 .header-text {
-  //font-family: "OldStandardTT", serif;
-  font-family: "NeueHaasDisplay", serif;
+  font-family: "OldStandardTT", serif;
+  //font-family: "NeueHaasDisplay", serif;
   //font-family: "MonumentGrotestBold", serif;
   font-size: 144px;
   letter-spacing: -5px;
@@ -48,6 +48,16 @@
     font-size: 60px;
   }
   .header-text-small{
+    letter-spacing: 0px;
     font-size: 44px;
+    @include respond-width($w-m){
+      font-size: 39px;
+    }
+    @include respond-width($w-m-s){
+      font-size: 27px;
+    }
+    @include respond-width($w-s){
+      font-size: 15px;
+    }
   }
 }

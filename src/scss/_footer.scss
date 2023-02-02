@@ -1,0 +1,53 @@
+
+
+/* <!-- -------------------------------RIGHTS------------------------------------- --> */
+.rights {
+  font-family: "WorkSans" , sans-serif;
+  font-size: 15px;
+  margin-left: 50%;
+  margin-top: 120px;
+  margin-bottom: 120px;
+  text-transform: uppercase;
+  @include respond-width($w-xs){
+    margin-top: 60px;
+    margin-bottom: 60px;
+    margin-left: 0%;
+  }
+}
+
+.right-mockups {
+  margin: 0px;
+}
+
+.right-fonts {
+  margin: 0px;
+}
+
+.right-design {
+  margin: 0px;
+}
+
+
+/* <!-- -------------------------------YEAR FOOTER------------------------------------- --> */
+
+.year-footer{
+  font-family: "OldStandardTT", serif;
+  text-align: center;
+  font-size: 30vw;
+  color: black;
+  position: relative;
+  max-width: 80vw;
+  margin: 0 auto;
+  text-align: center;
+  letter-spacing: -1vw;
+  .year-footer-c {
+    position: absolute;
+    top: 4vw;
+    left: 0px;
+    font-size: 10vw;
+  }
+  .year-footer-y{
+    display: block;
+    padding-left: 7vw;
+  }
+}

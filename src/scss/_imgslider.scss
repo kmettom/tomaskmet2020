@@ -1,0 +1,36 @@
+
+/* <!-- -------------------------------IMG------------------------------------- --> */
+
+.img-slider-section {
+  position: relative;
+  margin-bottom: 120px;
+  width: 100%;
+  text-align: center;
+
+  height: 1200px;
+  @include respond-width($w-xl){
+    height: 1100px;
+  }
+  @include respond-width($w-l){
+    height: 1000px;
+  }
+  @include respond-width($w-m){
+    height: 780px;
+  }
+  @include respond-width($w-s){
+    height: 500px;
+  }
+  @include respond-width($w-xs){
+    height: 325px;
+  }
+
+  .img-wrapper{
+    position: relative;
+  }
+
+  .portfolio-img{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+}

@@ -1,0 +1,58 @@
+
+/* <!-- -------------------------------TOP MENU------------------------------------- --> */
+.top-menu {
+  font-family: "WorkSans" , sans-serif;
+  font-size: 15px;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  z-index: 99;
+  pointer-events: none;
+  &:after{
+    content: "";
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    height: 1px;
+    width: 80%;
+    background-color: $black;
+    margin: 0 auto;
+  }
+  @include respond-width($w-xs){
+    font-size: 13px;
+  }
+
+  .contact-element{
+    pointer-events: auto;
+    padding: 20px 0px 20px 20px;
+  }
+
+  .available-wrapper{
+    @include respond-width($w-xs){
+      text-align: center;
+    }
+  }
+  .available-txt{
+    @include respond-width($w-xs){
+      display: block;
+    }
+  }
+
+}
+
+.menu-elements {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3% 13% 5px;
+  @include respond-width($w-m){
+    padding: 3% 9% 5px;
+  }
+  @include respond-width($w-m-s){
+    padding: 3% 5% 5px;
+  }
+}
+

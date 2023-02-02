@@ -1,0 +1,40 @@
+
+/* <!-- -------------------------------SKILLS------------------------------------- --> */
+
+.about,
+.skills {
+  font-family: "WorkSans" , sans-serif;
+  font-size: 17px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 120px;
+  margin-bottom: 120px;
+  @include respond-width($w-s){
+    font-size: 15px;
+  }
+  @include respond-width($w-xs){
+    margin-bottom: 80px;
+    margin-bottom: 80px;
+  }
+}
+
+.about-header,
+.skills-header {
+  width: 15%;
+  @include respond-width($w-xs){
+    width: 25%;
+  }
+}
+
+.about-text ,
+.skills-text {
+  width: 50%;
+  text-transform: uppercase;
+  @include respond-width($w-s){
+    width: 70%;
+  }
+  @include respond-width($w-s){
+    width: 75%;
+  }
+
+}

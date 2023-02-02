@@ -85,36 +85,46 @@ const pageEnterAnimation = () => {
 };
 
 const animateHeaderText = () => {
-    const $headerText = document.getElementById('headerText');
-    let mySplitText = new SplitText($headerText, { type: "words,chars" });
-    let chars = mySplitText.chars;
+    const $headerTexts = document.getElementsByClassName('header-txt-ani');
 
-    gsap.set($headerText, { perspective: 400 });
+    const  animateHeaderTextSingle = (_headerText) => {
 
-    let duration  = 0.75;
+        let mySplitText = new SplitText(_headerText, { type: "words,chars" });
+        let chars = mySplitText.chars;
 
-    for (let i = 0; i < chars.length; i++) {
+        gsap.set(_headerText, { perspective: 400 });
 
-        let tl = gsap.timeline();
+        let duration  = _headerText.classList.contains("fast") ?  0.15 : 1.25 ;
+        let delay  = _headerText.classList.contains("fast") ?  0.015 : 0.035 ;
 
-        tl.to(chars[i] , {
-            duration: 0,
-            opacity: 0,
-            y: 10,
-        }).to(  chars[i] , {
-            delay: 0.5 + (i*0.035),
-            duration: duration,
-            opacity: 1,
-            y: 0,
-            ease: "power3.out",
-        });
+        for (let i = 0; i < chars.length; i++) {
 
+            let tl = gsap.timeline();
+
+            tl.to(chars[i] , {
+                duration: 0,
+                opacity: 0,
+                y: 10,
+            }).to(  chars[i] , {
+                delay: 0.5 + (i*delay),
+                duration: duration,
+                opacity: 1,
+                y: 0,
+                ease: "power3.out",
+            });
+
+        }
+
+    }
+
+    for (var i = 0; i < $headerTexts.length; i++) {
+        animateHeaderTextSingle($headerTexts[i]);
     }
 }
 
-/*************************** */
+// /*************************** */
 // DOCUMENT LOADED -> INIT
-/*************************** */
+// /*************************** */
 
 document.addEventListener("DOMContentLoaded", function (event) {
   init();

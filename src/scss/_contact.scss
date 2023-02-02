@@ -1,0 +1,35 @@
+
+/* <!-- -------------------------------CONTACT------------------------------------- --> */
+.contact {
+  font-family: "WorkSans" , sans-serif;
+  font-size: 15px;
+  margin-left: 50%;
+  @include respond-width($w-xs){
+    margin-left: 0%;
+  }
+}
+
+.contact-number {
+  margin: 0px;
+}
+
+.contact-mail {
+  margin: 0px;
+}
+
+.social-media {
+  margin-top: 20px;
+  a{
+    padding: 15px 20px 15px 0px;
+    //margin-right: 15px;
+  }
+}
+
+.linkedin {
+  margin-right: 20px;
+}
+
+.github {
+  margin-right: 20px;
+}
+

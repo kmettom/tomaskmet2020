@@ -168,7 +168,6 @@ addImageMesh(_index, _id , _img){
   texture.needsUpdate = true;
 
   const randomScale = Math.random() * (10 - 5) + 5; // random between 5 - 15
-  console.log(randomScale);
 
   let material = new THREE.ShaderMaterial({
     uniforms:{
